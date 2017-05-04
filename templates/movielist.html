@@ -1,0 +1,693 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}FD动漫爱好网-视频作品{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/movie.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="home-main">
+    <div class="home-wrapper">
+
+      <div class="scroll-wrapper">
+
+        <div class="video-box has-dots">
+            <ul>
+                <li>
+                    <img src="{% static 'images/bg5.JPG' %}" alt="" width="440" height="220">
+                </li>
+                <li>
+                    <img src="{% static 'images/bg7.jpg' %}" alt="" width="440" height="220">
+                </li>
+                <li>
+                     <img src="{% static 'images/bg25.jpg' %}" alt="" width="440" height="220">
+                </li>
+            </ul>
+
+            <div class="unslider-arrow prev"></div>
+            <div class="unslider-arrow next"></div>
+        </div>
+
+        <div class="video_top">
+            <div class="item-wrapper">
+             <ul>
+                 {% for banner_video in banner_movie %}
+               <li class="item">
+                 <img src="{{ MEDIA_URL }}{{ banner_video.image }}" width="160" height="100">
+                   <a href="{% url 'movie:movie_detail' banner_video.id %}"><div class="item-mask"></div></a>
+                 <div class="item-title">{{ banner_video.name }}</div>
+                 <div class="info">
+                   <p class="up">up: {{ banner_video.user.nick_name }}</p>
+                   <p class="play">播放量: {{ banner_video.click_nums }}</p>
+                 </div>
+               </li>
+                 {% endfor %}
+             </ul>
+            </div>
+        </div>
+
+      </div>
+
+      <div class="select-animation">
+        <div class="select-wrapper">
+         <div class="left">
+            <div class="select_header_wrapper">
+             <img class="img" src="{% static 'images/avatar.png' %}" width="40" height="40">
+             <h1 class="title">动画</h1>
+             <div class="new_info">
+               <div class="new new_action">有关动态</div>
+               <div class="new new_video">最新投稿</div>
+               <div class="new_action_info">
+                 <span class="icon icon-fire"></span>
+                 <span class="info">关爱动画</span>
+               </div>
+
+               <div class="more_data">
+                 <div class="change_video">
+                   <span class="icon-loop2"></span>
+                   <span>5565条更新数据</span>
+                 </div>
+                 <div class="more">
+                   <span>更多</span>
+                   <span class="el-icon-arrow-right"></span>
+                 </div>
+                </div>
+
+         </div>
+       </div>
+
+             <div class="selectItem-wrapper">
+
+                 {% for video_movie in dh_movie %}
+                 <div class="item" >
+                   <img class="thumb" src="{{ MEDIA_URL }}{{ video_movie.image }}" width="160" height="100">
+                   <a href="{% url 'movie:movie_detail' video_movie.id %}"><div class="item_mask"></div></a>
+                   <div class="title">{{ video_movie.name }}</div>
+                   <div class="info">
+                     <div class="see">
+                        <span class="fa fa-comments"></span>
+                        <span>{{ video_movie.click_nums }}</span>
+                     </div>
+                     <div class="commit">
+                       <span class="fa fa-eye"></span>
+                       <span>886</span>
+                     </div>
+                   </div>
+                 </div>
+                 {% endfor %}
+
+               </div>
+
+
+         </div>
+         <div class="right">
+            <div class="selectTop">
+            <div class="header">
+               <h1>排行</h1>
+               <div class="new_date">3日<span class="icon el-icon-arrow-down"></span></div>
+         </div>
+
+        <div class="top">
+                <div class="more">查看更多<span class="icon el-icon-arrow-right"></span></div>
+
+        {% for video_top in dh_movie_top %}
+            {% if forloop.counter == 1 %}
+           <div  class="item">
+             <i class="no">{{ forloop.counter }}</i>
+             <div class="top_one">
+                 <a href="{% url 'movie:movie_detail' video_top.id %}"><img src="{{ MEDIA_URL }}{{ video_top.image }}" width="88" height="58"></a>
+
+               <div class="info">
+                   <a href="{% url 'movie:movie_detail' video_top.id %}"><h1 class="title" >{{ video_top.name }}</h1></a>
+                   <a href="{% url 'movie:movie_detail' video_top.id %}"><span class="score">综合评分: ss</span></a>
+               </div>
+             </div>
+
+           </div>
+            {% else %}
+                <div  class="item">
+             <i class="no">{{ forloop.counter }}</i>
+                    <a href="{% url 'movie:movie_detail' video_top.id %}"><span  class="title" >{{ video_top.name }}</span></a>
+           </div>
+            {% endif %}
+        {% endfor %}
+
+
+
+           <!--<div class="item">-->
+             <!--<i class="no">1</i>-->
+             <!--<div class="top_one">-->
+             <!--</div>-->
+             <!--<span class="title">sdhsadhuisadsaoduosaudousa爱的撒旦撒旦撒旦o</span>-->
+           <!--</div>-->
+
+
+
+         </div>
+   </div>
+         </div>
+
+       </div>
+      </div>
+
+        <div class="select-animation">
+            <div class="select-wrapper">
+             <div class="left">
+                <div class="select_header_wrapper">
+                 <img class="img" src="{% static 'images/avatar.png' %}" width="40" height="40">
+                 <h1 class="title">番剧</h1>
+                 <div class="new_info">
+                   <div class="new new_action">有关动态</div>
+                   <div class="new new_video">最新投稿</div>
+                   <div class="new_action_info">
+                     <span class="icon icon-fire"></span>
+                     <span class="info">关爱番剧</span>
+                   </div>
+
+                   <div class="more_data">
+                     <div class="change_video">
+                       <span class="icon-loop2"></span>
+                       <span>5565条更新数据</span>
+                     </div>
+                     <div class="more">
+                       <span>更多</span>
+                       <span class="el-icon-arrow-right"></span>
+                     </div>
+                    </div>
+
+             </div>
+           </div>
+
+                 <div class="selectItem-wrapper">
+
+                     {% for video_movie in fj_movie %}
+                     <div class="item" >
+                       <img class="thumb" src="{{ MEDIA_URL }}{{ video_movie.image }}" width="160" height="100">
+                       <a href="{% url 'movie:movie_detail' video_movie.id %}"><div class="item_mask"></div></a>
+                       <div class="title">{{ video_movie.name }}</div>
+                       <div class="info">
+                         <div class="see">
+                            <span class="fa fa-eye"></span>
+                            <span>{{ video_movie.click_nums }}</span>
+                         </div>
+                         <div class="commit">
+                           <span class="fa fa-eye"></span>
+                           <span>886</span>
+                         </div>
+                       </div>
+                     </div>
+                     {% endfor %}
+
+                   </div>
+
+
+             </div>
+             <div class="right">
+                <div class="selectTop">
+                <div class="header">
+                   <h1>排行</h1>
+                   <div class="new_date">3日<span class="icon el-icon-arrow-down"></span></div>
+             </div>
+
+            <div class="top">
+                <div class="more">查看更多<span class="icon el-icon-arrow-right"></span></div>
+
+        {% for video_top in fj_movie_top %}
+            {% if forloop.counter == 1 %}
+           <div  class="item">
+             <i class="no">{{ forloop.counter }}</i>
+             <div class="top_one">
+                 <a href="{% url 'movie:movie_detail' video_top.id %}"><img src="{{ MEDIA_URL }}{{ video_top.image }}" width="88" height="58"></a>
+
+               <div class="info">
+                   <a href="{% url 'movie:movie_detail' video_top.id %}"><h1 class="title" >{{ video_top.name }}</h1></a>
+                   <a href="{% url 'movie:movie_detail' video_top.id %}"><span class="score">综合评分: ss</span></a>
+               </div>
+             </div>
+
+           </div>
+            {% else %}
+                <div  class="item">
+             <i class="no">{{ forloop.counter }}</i>
+                    <a href="{% url 'movie:movie_detail' video_top.id %}"><span  class="title" >{{ video_top.name }}</span></a>
+           </div>
+            {% endif %}
+        {% endfor %}
+
+
+
+           <!--<div class="item">-->
+             <!--<i class="no">1</i>-->
+             <!--<div class="top_one">-->
+             <!--</div>-->
+             <!--<span class="title">sdhsadhuisadsaoduosaudousa爱的撒旦撒旦撒旦o</span>-->
+           <!--</div>-->
+
+
+
+         </div>
+       </div>
+             </div>
+
+           </div>
+          </div>
+
+    <div class="select-animation">
+            <div class="select-wrapper">
+             <div class="left">
+                <div class="select_header_wrapper">
+                 <img class="img" src="{% static 'images/avatar.png' %}" width="40" height="40">
+                 <h1 class="title">鬼畜</h1>
+                 <div class="new_info">
+                   <div class="new new_action">有关动态</div>
+                   <div class="new new_video">最新投稿</div>
+                   <div class="new_action_info">
+                     <span class="icon icon-fire"></span>
+                     <span class="info">关爱鬼畜</span>
+                   </div>
+
+                   <div class="more_data">
+                     <div class="change_video">
+                       <span class="icon-loop2"></span>
+                       <span>5565条更新数据</span>
+                     </div>
+                     <div class="more">
+                       <span>更多</span>
+                       <span class="el-icon-arrow-right"></span>
+                     </div>
+                    </div>
+
+             </div>
+           </div>
+
+                 <div class="selectItem-wrapper">
+
+                     {% for video_movie in gc_movie %}
+                     <div class="item" >
+                       <img class="thumb" src="{{ MEDIA_URL }}{{ video_movie.image }}" width="160" height="100">
+                       <a href="{% url 'movie:movie_detail' video_movie.id %}"><div class="item_mask"></div></a>
+                       <div class="title">{{ video_movie.name }}</div>
+                       <div class="info">
+                         <div class="see">
+                            <span class="fa fa-eye"></span>
+                            <span>{{ video_movie.click_nums }}</span>
+                         </div>
+                         <div class="commit">
+                           <span class="fa fa-eye"></span>
+                           <span>886</span>
+                         </div>
+                       </div>
+                     </div>
+                     {% endfor %}
+
+                   </div>
+
+
+             </div>
+             <div class="right">
+                <div class="selectTop">
+                <div class="header">
+                   <h1>排行</h1>
+                   <div class="new_date">3日<span class="icon el-icon-arrow-down"></span></div>
+             </div>
+
+            <div class="top">
+                <div class="more">查看更多<span class="icon el-icon-arrow-right"></span></div>
+
+        {% for video_top in gc_movie_top %}
+            {% if forloop.counter == 1 %}
+           <div  class="item">
+             <i class="no">{{ forloop.counter }}</i>
+             <div class="top_one">
+                 <a href="{% url 'movie:movie_detail' video_top.id %}"><img src="{{ MEDIA_URL }}{{ video_top.image }}" width="88" height="58"></a>
+
+               <div class="info">
+                   <a href="{% url 'movie:movie_detail' video_top.id %}"><h1 class="title" >{{ video_top.name }}</h1></a>
+                   <a href="{% url 'movie:movie_detail' video_top.id %}"><span class="score">综合评分: ss</span></a>
+               </div>
+             </div>
+
+           </div>
+            {% else %}
+                <div  class="item">
+             <i class="no">{{ forloop.counter }}</i>
+                    <a href="{% url 'movie:movie_detail' video_top.id %}"><span  class="title" >{{ video_top.name }}</span></a>
+           </div>
+            {% endif %}
+        {% endfor %}
+
+
+
+           <!--<div class="item">-->
+             <!--<i class="no">1</i>-->
+             <!--<div class="top_one">-->
+             <!--</div>-->
+             <!--<span class="title">sdhsadhuisadsaoduosaudousa爱的撒旦撒旦撒旦o</span>-->
+           <!--</div>-->
+
+
+
+         </div>
+       </div>
+             </div>
+
+           </div>
+          </div>
+
+    <div class="select-animation">
+            <div class="select-wrapper">
+             <div class="left">
+                <div class="select_header_wrapper">
+                 <img class="img" src="{% static 'images/avatar.png' %}" width="40" height="40">
+                 <h1 class="title">科技</h1>
+                 <div class="new_info">
+                   <div class="new new_action">有关动态</div>
+                   <div class="new new_video">最新投稿</div>
+                   <div class="new_action_info">
+                     <span class="icon icon-fire"></span>
+                     <span class="info">关爱科技</span>
+                   </div>
+
+                   <div class="more_data">
+                     <div class="change_video">
+                       <span class="icon-loop2"></span>
+                       <span>5565条更新数据</span>
+                     </div>
+                     <div class="more">
+                       <span>更多</span>
+                       <span class="el-icon-arrow-right"></span>
+                     </div>
+                    </div>
+
+             </div>
+           </div>
+
+                 <div class="selectItem-wrapper">
+
+                     {% for video_movie in kj_movie %}
+                     <div class="item" >
+                       <img class="thumb" src="{{ MEDIA_URL }}{{ video_movie.image }}" width="160" height="100">
+                       <a href="{% url 'movie:movie_detail' video_movie.id %}"><div class="item_mask"></div></a>
+                       <div class="title">{{ video_movie.name }}</div>
+                       <div class="info">
+                         <div class="see">
+                            <span class="fa fa-eye"></span>
+                            <span>{{ video_movie.click_nums }}</span>
+                         </div>
+                         <div class="commit">
+                           <span class="fa fa-eye"></span>
+                           <span>886</span>
+                         </div>
+                       </div>
+                     </div>
+                     {% endfor %}
+
+                   </div>
+
+
+             </div>
+             <div class="right">
+                <div class="selectTop">
+                <div class="header">
+                   <h1>排行</h1>
+                   <div class="new_date">3日<span class="icon el-icon-arrow-down"></span></div>
+             </div>
+
+            <div class="top">
+                <div class="more">查看更多<span class="icon el-icon-arrow-right"></span></div>
+
+        {% for video_top in kj_movie_top %}
+            {% if forloop.counter == 1 %}
+           <div  class="item">
+             <i class="no">{{ forloop.counter }}</i>
+             <div class="top_one">
+                 <a href="{% url 'movie:movie_detail' video_top.id %}"><img src="{{ MEDIA_URL }}{{ video_top.image }}" width="88" height="58"></a>
+
+               <div class="info">
+                   <a href="{% url 'movie:movie_detail' video_top.id %}"><h1 class="title" >{{ video_top.name }}</h1></a>
+                   <a href="{% url 'movie:movie_detail' video_top.id %}"><span class="score">综合评分: ss</span></a>
+               </div>
+             </div>
+
+           </div>
+            {% else %}
+                <div  class="item">
+             <i class="no">{{ forloop.counter }}</i>
+                    <a href="{% url 'movie:movie_detail' video_top.id %}"><span  class="title" >{{ video_top.name }}</span></a>
+           </div>
+            {% endif %}
+        {% endfor %}
+
+
+
+           <!--<div class="item">-->
+             <!--<i class="no">1</i>-->
+             <!--<div class="top_one">-->
+             <!--</div>-->
+             <!--<span class="title">sdhsadhuisadsaoduosaudousa爱的撒旦撒旦撒旦o</span>-->
+           <!--</div>-->
+
+
+
+         </div>
+       </div>
+             </div>
+
+           </div>
+          </div>
+
+    <div class="select-animation">
+            <div class="select-wrapper">
+             <div class="left">
+                <div class="select_header_wrapper">
+                 <img class="img" src="{% static 'images/avatar.png' %}" width="40" height="40">
+                 <h1 class="title">电视剧</h1>
+                 <div class="new_info">
+                   <div class="new new_action">有关动态</div>
+                   <div class="new new_video">最新投稿</div>
+                   <div class="new_action_info">
+                     <span class="icon icon-fire"></span>
+                     <span class="info">关爱电视剧</span>
+                   </div>
+
+                   <div class="more_data">
+                     <div class="change_video">
+                       <span class="icon-loop2"></span>
+                       <span>5565条更新数据</span>
+                     </div>
+                     <div class="more">
+                       <span>更多</span>
+                       <span class="el-icon-arrow-right"></span>
+                     </div>
+                    </div>
+
+             </div>
+           </div>
+
+                 <div class="selectItem-wrapper">
+
+                     {% for video_movie in dsj_movie %}
+                     <div class="item" >
+                       <img class="thumb" src="{{ MEDIA_URL }}{{ video_movie.image }}" width="160" height="100">
+                       <a href="{% url 'movie:movie_detail' video_movie.id %}"><div class="item_mask"></div></a>
+                       <div class="title">{{ video_movie.name }}</div>
+                       <div class="info">
+                         <div class="see">
+                            <span class="fa fa-eye"></span>
+                            <span>{{ video_movie.click_nums }}</span>
+                         </div>
+                         <div class="commit">
+                           <span class="fa fa-eye"></span>
+                           <span>886</span>
+                         </div>
+                       </div>
+                     </div>
+                     {% endfor %}
+
+                   </div>
+
+
+             </div>
+             <div class="right">
+                <div class="selectTop">
+                <div class="header">
+                   <h1>排行</h1>
+                   <div class="new_date">3日<span class="icon el-icon-arrow-down"></span></div>
+             </div>
+
+            <div class="top">
+                <div class="more">查看更多<span class="icon el-icon-arrow-right"></span></div>
+
+        {% for video_top in dsj_movie_top %}
+            {% if forloop.counter == 1 %}
+           <div  class="item">
+             <i class="no">{{ forloop.counter }}</i>
+             <div class="top_one">
+                 <a href="{% url 'movie:movie_detail' video_top.id %}"><img src="{{ MEDIA_URL }}{{ video_top.image }}" width="88" height="58"></a>
+
+               <div class="info">
+                   <a href="{% url 'movie:movie_detail' video_top.id %}"><h1 class="title" >{{ video_top.name }}</h1></a>
+                   <a href="{% url 'movie:movie_detail' video_top.id %}"><span class="score">综合评分: ss</span></a>
+               </div>
+             </div>
+
+           </div>
+            {% else %}
+                <div  class="item">
+             <i class="no">{{ forloop.counter }}</i>
+                    <a href="{% url 'movie:movie_detail' video_top.id %}"><span  class="title" >{{ video_top.name }}</span></a>
+           </div>
+            {% endif %}
+        {% endfor %}
+
+
+
+           <!--<div class="item">-->
+             <!--<i class="no">1</i>-->
+             <!--<div class="top_one">-->
+             <!--</div>-->
+             <!--<span class="title">sdhsadhuisadsaoduosaudousa爱的撒旦撒旦撒旦o</span>-->
+           <!--</div>-->
+
+
+
+         </div>
+       </div>
+             </div>
+
+           </div>
+          </div>
+
+    <div class="select-animation">
+            <div class="select-wrapper">
+             <div class="left">
+                <div class="select_header_wrapper">
+                 <img class="img" src="{% static 'images/avatar.png' %}" width="40" height="40">
+                 <h1 class="title">里番</h1>
+                 <div class="new_info">
+                   <div class="new new_action">有关动态</div>
+                   <div class="new new_video">最新投稿</div>
+                   <div class="new_action_info">
+                     <span class="icon icon-fire"></span>
+                     <span class="info">关爱里番</span>
+                   </div>
+
+                   <div class="more_data">
+                     <div class="change_video">
+                       <span class="icon-loop2"></span>
+                       <span>5565条更新数据</span>
+                     </div>
+                     <div class="more">
+                       <span>更多</span>
+                       <span class="el-icon-arrow-right"></span>
+                     </div>
+                    </div>
+
+             </div>
+           </div>
+
+                 <div class="selectItem-wrapper">
+
+                     {% for video_movie in lf_movie %}
+                     <div class="item" >
+                       <img class="thumb" src="{{ MEDIA_URL }}{{ video_movie.image }}" width="160" height="100">
+                        <a href="{% url 'movie:movie_detail' video_movie.id %}"><div class="item_mask"></div></a>
+                       <div class="title">{{ video_movie.name }}</div>
+                       <div class="info">
+                         <div class="see">
+                            <span class="fa fa-eye"></span>
+                            <span>{{ video_movie.click_nums }}</span>
+                         </div>
+                         <div class="commit">
+                           <span class="fa fa-eye"></span>
+                           <span>886</span>
+                         </div>
+                       </div>
+                     </div>
+                     {% endfor %}
+
+                   </div>
+
+
+             </div>
+             <div class="right">
+                <div class="selectTop">
+                <div class="header">
+                   <h1>排行</h1>
+                   <div class="new_date">3日<span class="icon el-icon-arrow-down"></span></div>
+             </div>
+
+            <div class="top">
+                <div class="more">查看更多<span class="icon el-icon-arrow-right"></span></div>
+
+        {% for video_top in lf_movie_top %}
+            {% if forloop.counter == 1 %}
+           <div  class="item">
+             <i class="no">{{ forloop.counter }}</i>
+             <div class="top_one">
+                 <a href="{% url 'movie:movie_detail' video_top.id %}"><img src="{{ MEDIA_URL }}{{ video_top.image }}" width="88" height="58"></a>
+
+               <div class="info">
+                   <a href="{% url 'movie:movie_detail' video_top.id %}"><h1 class="title" >{{ video_top.name }}</h1></a>
+                   <a href="{% url 'movie:movie_detail' video_top.id %}"><span class="score">综合评分: ss</span></a>
+               </div>
+             </div>
+
+           </div>
+            {% else %}
+                <div  class="item">
+             <i class="no">{{ forloop.counter }}</i>
+                    <a href="{% url 'movie:movie_detail' video_top.id %}"><span  class="title" >{{ video_top.name }}</span></a>
+           </div>
+            {% endif %}
+        {% endfor %}
+
+
+
+           <!--<div class="item">-->
+             <!--<i class="no">1</i>-->
+             <!--<div class="top_one">-->
+             <!--</div>-->
+             <!--<span class="title">sdhsadhuisadsaoduosaudousa爱的撒旦撒旦撒旦o</span>-->
+           <!--</div>-->
+
+
+
+         </div>
+       </div>
+             </div>
+
+           </div>
+          </div>
+
+
+    </div>
+
+    <videoDetail :videoData="videoDetail" ></videoDetail>
+
+  </div>
+{% endblock %}
+
+
+{% block js %}
+<script>
+$(function() {
+
+    var unslider = $('.video-box').unslider({
+		speed: 500,               //  The speed to animate each slide (in milliseconds)
+		delay: 5000,              //  The delay between slide animations (in milliseconds)
+		complete: function() {},  //  A function that gets called after every slide animation
+		keys: true,               //  Enable keyboard (left, right) arrow shortcuts
+		dots: true,               //  Display dot navigation
+		fluid: false              //  Support responsive design. May break non-responsive designs
+	});
+
+    $('.unslider-arrow').click(function() {
+        var fn = this.className.split(' ')[1];
+        unslider.data('unslider')[fn]();
+    });
+});
+</script>
+{% endblock %}

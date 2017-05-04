@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}FD动漫爱好网-本子列表{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/book.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div id="book-mainBox" class="clearfix" style="margin-top: 10px;">
+
+    <div class="book-box box-clone clearfix" style="opacity:1">
+      <div class="book-pic clearfix" style="width: 190px;">
+
+          <a href="{% url 'book:book_add' %}"><div style="cursor: pointer"  class="book-newPost">发新帖</div></a>
+
+        <div class="book-category clearfix">
+          <div>分类:</div>
+          <a href="?tag=&sort={{ sort }}"><div class="book-category-icon category-tab {% if tag == '' %}active{% endif %}">全部</div></a>
+          <a href="?tag=dmtj&sort={{ sort }}"><div class="book-category-icon category-tab {% if tag == 'dmtj' %}active{% endif %}">动漫画集</div></a>
+          <a href="?tag=zzhj&sort={{ sort }}"><div class="book-category-icon category-tab {% if tag == 'zzhj' %}active{% endif %}">杂志画集</div></a>
+          <a href="?tag=wztj&sort={{ sort }}"><div class="book-category-icon category-tab {% if tag == 'wztj' %}active{% endif %}">网站推荐</div></a>
+          <a href="?tag=yxcg&sort={{ sort }}"><div class="book-category-icon category-tab {% if tag == 'yxcg' %}active{% endif %}">游戏CG</div></a>
+          <a href="?tag=grzh&sort={{ sort }}"><div class="book-category-icon category-tab {% if tag == 'grzh' %}active{% endif %}">个人杂图</div></a>
+        </div>
+        <div class="book-category clearfix" style="height: 30px;">
+          <div>筛选:</div>
+          <div class="book-category-icon active">全部</div>
+          <div class="book-category-icon">人气</div>
+        </div>
+
+        <div class="book-category clearfix" style="height: 110px;">
+          <div>排序:</div>
+            <a href="?tag={{ tag }}&sort="><div class="book-category-icon {% if sort == '' %}active{% endif %}">按发表时间</div></a>
+
+          <div class="book-category-icon">按回复时间</div>
+            <a href="?tag={{ tag }}&sort=hot"><div class="book-category-icon {% if sort == 'hot' %}active{% endif %}">按查看次数</div></a>
+
+          <div class="book-category-icon">按回复次数</div>
+          <div class="book-category-icon">随机</div>
+        </div>
+      </div>
+    </div>
+
+    {% for book in book_list.object_list %}
+    <div  class="book-box" >
+
+      <div class="book-pic">
+          <a href="{% url 'book:book_detail' book.id %}"><img src="{{ MEDIA_URL }}{{ book.image }}" alt="">
+        <div class="book-title">{{ book.name }}</div></a>
+        <div class="book-icon clearfix">
+          <div class="icon-eye-open">sss</div>
+          <div class="icon-comments-alt">评论：55555</div>
+        </div>
+        <div class="book-username">
+            <a href="{% url 'user:user_info' book.user.id %}"><img src="{{ MEDIA_URL }}{{ book.user.image }}" alt=""></a>
+          <div >sss</div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+
+
+    <div class="pageturn">
+
+                    <ul class="pagelist">
+                        {% if book_list.has_previous %}
+                            <li class="long"><a href="?{{ book_list.previous_page_number.querystring }}">上一页</a></li>
+                        {% endif %}
+
+                        {% for page in book_list.pages %}
+                            {% if page %}
+                                {% ifequal page book_list.number %}
+                                    <li class="active"><a href="?{{ page.querystring }}">{{ page }}</a></li>
+                                {% else %}
+                                    <li><a href="?{{ page.querystring }}" class="page">{{ page }}</a></li>
+                                {% endifequal %}
+                            {% else %}
+                                <li class="none"><a href="">...</a></li>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if book_list.has_next %}
+                            <li class="long"><a href="?{{ book_list.next_page_number.querystring }}">下一页</a></li>
+                        {% endif %}
+                    </ul>
+    </div>
+</div>
+
+{% endblock %}
+{% block js %}
+<script>
+$(function(){
+    setTimeout(function(){
+        waterfall();
+    },100);
+
+    setTimeout(function () {
+        var $lastBox = $('#book-mainBox .book-box').last();
+        var lastBoxDis = $lastBox.offset().top+Math.floor($lastBox.outerHeight()/2);
+        $('#book-mainBox').animate({
+            height:lastBoxDis - 20
+        },600) ;
+    },700);
+
+    $(window).on('scroll',function(){
+      waterfall();
+    })
+});
+
+function waterfall(){
+  var main = $('#book-mainBox');
+  var $boxs = $('#book-mainBox .book-box');
+  var w = $boxs.eq(1).outerWidth();
+  var cols = Math.floor(main.width()/w);
+  var hArr = [];
+  $boxs.each(function(index,value){
+    var h = $boxs.eq(index).outerHeight();
+    if (index < cols){
+      hArr[index] = h;
+       $(value).animate({
+        opacity:1,
+      },600)
+    }else{
+      var minH = Math.min.apply(null,hArr);
+      var minHIndex = $.inArray(minH,hArr);
+      $(value).css({
+        position:'absolute',
+      }).animate({
+        top:minH,
+        left:minHIndex*w,
+        opacity:1,
+      },600);
+      hArr[minHIndex]+=$boxs.eq(index).outerHeight();
+
+    }
+  });
+}
+
+
+
+</script>
+{% endblock %}
+
+
+

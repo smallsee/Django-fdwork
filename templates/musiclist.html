@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}FD动漫爱好网-音乐列表{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/music.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="music-banner">
+        <img src="{% static 'images/forum_header36.jpg' %}" alt="" width="100%">
+    </div>
+
+    <div class="music-wrapper">
+        <div class="music-category">
+            <ul>
+                <a href="?tag="><li class="category-item {% if tag == '' %}active{% endif %}">全部 </li></a>
+                <a href="?tag=zy"><li class="category-item {% if tag == 'zy' %}active{% endif %}">治愈 <span >55</span></li></a>
+                <a href="?tag=rx"><li class="category-item {% if tag == 'rx' %}active{% endif %}">燃向</li></a>
+                <a href="?tag=love"><li class="category-item {% if tag == 'love' %}active{% endif %}">恋爱</li></a>
+                <a href="?tag=sad"><li class="category-item {% if tag == 'sad' %}active{% endif %}">悲伤</li></a>
+                <a href="?tag=cyy"><li class="category-item {% if tag == 'cyy' %}active{% endif %}">纯音乐</li></a>
+                <a href="?tag=code"><li class="category-item {% if tag == 'code' %}active{% endif %}">代码</li></a>
+            </ul>
+        </div>
+        <div class="music-box clearfix">
+            <ul>
+                {% for music in music_list.object_list %}
+                <li class="box-item">
+                    <div class="item-image">
+                        <a href="{% url 'music:music_detail' music.id %}"><img src="{{ MEDIA_URL }}{{ music.image }}" alt="" height="100%" width="100%"></a>
+                        <span>{{ music.get_tag_display }}</span>
+                    </div>
+                    <p class="title">{{ music.name }}</p>
+                    <p class="by-user">by——{{ music.user.nick_name }}</p>
+                    <div class="hr-90"></div>
+                    <div class="music-info">
+                        <div class="info-item">
+                            <span class="fa fa-eye"></span>
+                            {{ music.click_nums }}
+                        </div>
+
+                        <div class="info-item">
+                            <span class="fa fa-commenting"></span>
+                            {{ music.fav_nums }}
+                        </div>
+
+                        <div class="info-image">
+                            <img src="{{ MEDIA_URL }}{{ music.user.image }}" alt="" width="25" height="25">
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    
+    
+    
+        <div class="pageturn">
+
+                    <ul class="pagelist">
+                        {% if music_list.has_previous %}
+                            <li class="long"><a href="?{{ music_list.previous_page_number.querystring }}">上一页</a></li>
+                        {% endif %}
+
+                        {% for page in music_list.pages %}
+                            {% if page %}
+                                {% ifequal page music_list.number %}
+                                    <li class="active"><a href="?{{ page.querystring }}">{{ page }}</a></li>
+                                {% else %}
+                                    <li><a href="?{{ page.querystring }}" class="page">{{ page }}</a></li>
+                                {% endifequal %}
+                            {% else %}
+                                <li class="none"><a href="">...</a></li>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if music_list.has_next %}
+                            <li class="long"><a href="?{{ music_list.next_page_number.querystring }}">下一页</a></li>
+                        {% endif %}
+                    </ul>
+        </div>
+    </div>
+{% endblock %}

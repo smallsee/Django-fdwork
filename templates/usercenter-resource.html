@@ -1,0 +1,70 @@
+{% extends 'usercenter-base.html' %}
+{% load staticfiles %}
+
+{% block title %}FD动漫爱好网-本子列表{% endblock %}
+
+{% block content %}
+
+<div class="user-category-wrapper clearfix">
+            <div class="user-title" >
+            <div class="user-title-box" >
+              <div class="desc" >投稿资源</div>
+              <div class="badge" ></div>
+              <div class="news" >最新发布</div>
+              <div class="see" >最多播放</div>
+            </div>
+
+
+
+
+
+          </div>
+
+
+
+            {% for resource in resource_user.object_list %}
+            <div  class="user-video-box" >
+              <a href="{% url 'resource:resource_detail' resource.id %}"><img src="{{ MEDIA_URL }}{{ resource.image }}" alt="" width="100%" height="100px"></a>
+              <p class="desc">{{ resource.desc }}</p>
+              <div class="see-box" >
+                <div class="see-item" >
+                  <span>播放:</span>
+                  <span >{{ resource.click_nums }}</span>
+                </div>
+
+                <div class="see-item" >
+                  <span>收藏:</span>
+                  <span>{{ resource.fav_nums }}</span>
+                </div>
+
+              </div>
+            </div>
+            {% endfor %}
+
+       <div class="pageturn">
+
+                    <ul class="pagelist">
+                        {% if resource_user.has_previous %}
+                            <li class="long"><a href="?{{ resource_user.previous_page_number.querystring }}">上一页</a></li>
+                        {% endif %}
+
+                        {% for page in resource_user.pages %}
+                            {% if page %}
+                                {% ifequal page resource_user.number %}
+                                    <li class="active"><a href="?{{ page.querystring }}">{{ page }}</a></li>
+                                {% else %}
+                                    <li><a href="?{{ page.querystring }}" class="page">{{ page }}</a></li>
+                                {% endifequal %}
+                            {% else %}
+                                <li class="none"><a href="">...</a></li>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if resource_user.has_next %}
+                            <li class="long"><a href="?{{ resource_user.next_page_number.querystring }}">下一页</a></li>
+                        {% endif %}
+                    </ul>
+    </div>
+        </div>
+
+{% endblock %}

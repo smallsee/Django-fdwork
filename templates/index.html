@@ -1,0 +1,359 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}FD动漫爱好网{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/nivo-slider.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/flexslider.css' %}">
+     <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+{% endblock %}
+
+{% block content %}
+{#本子#}
+<div class="book-box ">
+    <ul class="">
+        {% for banner_movie in movie_banner %}
+        <li class="book-item clearfix">
+            <div class="book-left">
+                <img src="{{ MEDIA_URL }}{{ banner_movie.book.image }}" alt="" width="805" height="440">
+                <div class="book-desk">{{ banner_movie.book.desc }}</div>
+            </div>
+            <div class="book-right">
+
+                <div class="book-right-item" style="margin-bottom: 6px">
+                    <img src="{{ MEDIA_URL }}{{ banner_movie.image }}" alt="" width="350" height="217" >
+                    <div class="book-desk">{{ banner_movie.desc }}</div>
+                </div>
+
+                <div class="book-right-item" >
+                    <img src="{{ MEDIA_URL }}{{ banner_movie.article.image }}" alt="" width="350" height="217" >
+                    <div class="book-desk">{{ banner_movie.article.desc }}</div>
+                </div>
+            </div>
+        </li>
+        {% endfor %}
+
+
+    </ul>
+
+    <div class="unslider-arrow prev"></div>
+    <div class="unslider-arrow next"></div>
+</div>
+<div class="index-nav-title" style="background: url({% static 'images/diy_head.png' %}) 50% -3% no-repeat "></div>
+{#人员#}
+<div class="fd-author clearfix">
+    <ul>
+        <li class="author-box">
+            <div class="author-top">
+                <img src="{% static 'images/avatar.png' %}" width="100%" height="100%">
+            </div>
+            <div class="author-bottom clearfix">
+                <div class="desc">
+                <h4>AE</h4>
+                <p>小天使</p>
+                </div>
+            </div>
+
+            <div class="author-avatar">
+            <img src="{% static 'images/avatar.png' %}" alt="" width="100" height="100">
+            </div>
+        </li>
+        <li class="author-box">
+            <div class="author-top">
+                <img src="{% static 'images/avatar.png' %}" width="100%" height="100%">
+            </div>
+            <div class="author-bottom clearfix">
+                <div class="desc">
+                <h4>AE</h4>
+                <p>小天使</p>
+                </div>
+            </div>
+
+            <div class="author-avatar">
+            <img src="{% static 'images/avatar.png' %}" alt="" width="100" height="100">
+            </div>
+        </li>
+        <li class="author-box">
+            <div class="author-top">
+                <img src="{% static 'images/avatar.png' %}" width="100%" height="100%">
+            </div>
+            <div class="author-bottom clearfix">
+                <div class="desc">
+                <h4>AE</h4>
+                <p>小天使</p>
+                </div>
+            </div>
+
+            <div class="author-avatar">
+            <img src="{% static 'images/avatar.png' %}" alt="" width="100" height="100">
+            </div>
+        </li>
+        <li class="author-box">
+            <div class="author-top">
+                <img src="{% static 'images/avatar.png' %}" width="100%" height="100%">
+            </div>
+            <div class="author-bottom clearfix">
+                <div class="desc">
+                <h4>AE</h4>
+                <p>小天使</p>
+                </div>
+            </div>
+
+            <div class="author-avatar">
+            <img src="{% static 'images/avatar.png' %}" alt="" width="100" height="100">
+            </div>
+        </li>
+        <li class="author-box">
+            <div class="author-top">
+                <img src="{% static 'images/avatar.png' %}" width="100%" height="100%">
+            </div>
+            <div class="author-bottom clearfix">
+                <div class="desc">
+                <h4>AE</h4>
+                <p>小天使</p>
+                </div>
+            </div>
+
+            <div class="author-avatar">
+            <img src="{% static 'images/avatar.png' %}" alt="" width="100" height="100">
+            </div>
+        </li>
+    </ul>
+</div>
+<div class="index-nav-title" style="background: url({% static 'images/diy_head.png' %}) 50% 30% no-repeat "></div>
+{#资讯#}
+<div class="latest-news clearfix">
+    <div class="news-left-box">
+    <div class="news-left nivoSlider">
+        {% for boo_image in book_list %}
+        <img class="news-item" src="{{ MEDIA_URL }}{{ boo_image.image }}" alt="" width="100%" >
+        {% endfor %}
+    </div>
+    <div id="indicatorContainer"></div>
+    </div>
+    <div class="news-right">
+        <ul>
+            {% for book in book_list %}
+            <li class="news-right-item">
+                <div class="title">
+                    <h4>{{ book.name }}</h4>
+                </div>
+                <div class="user-article clearfix">
+                    <div class="user-image">
+                        <img src="{{ MEDIA_URL }}{{ book.user.image }}" width="70" height="70" alt="">
+                    </div>
+                    <div class="user-info">
+                        <div class="user-info-item">
+                            <span class="fa fa-user"></span>
+                            <span>: {{ book.user.nick_name }}</span>
+                        </div>
+                        <div class="user-info-item">
+                            <span class="fa fa-clock-o"></span>
+                            <span>: {{ book.add_time }}</span>
+                        </div>
+                    </div>
+                    <div class="article-fav">
+                        <div class="article-fav-item">
+                            <span class="fa fa-eye"></span>
+                            <span class="fa fa-commenting"></span>
+                            <span class="fa fa-star"></span>
+                        </div>
+                        <div class="article-fav-item">
+                            <span>{{ book.click_nums }}</span>
+                            <span>2</span>
+                            <span>{{ book.fav_nums }}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="user-desc">
+                    {{ book.desc }}
+                </div>
+                <a href="{% url 'book:book_detail' book.id %}"><div class="more">
+                   > 查看详情 >
+                </div></a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+</div>
+
+<div class="index-nav-title" style="background: url({% static 'images/diy_head.png' %}) 50% 65% no-repeat "></div>
+{#作品#}
+<div class="movie-box flexslider">
+    <ul class="slides">
+        {% for movie in movie_list %}
+        <li class="movie-box-item" >
+            <img src="{{ MEDIA_URL }}{{ movie.image }}" alt="">
+            <div class="bette_video_author">
+              <div class="bette_video_author_video">
+                <a href="{% url 'movie:movie_detail' movie.id %}"><img src="{{ MEDIA_URL }}{{ movie.image }}" alt="" width="100%" height="220px" ></a>
+                <p >{{ movie.desc }}</p>
+                <div class="bette_video_author_video_name">
+                  <div class="left">bg: {{ movie.user.nick_name }}</div>
+                  <div class="right" >{{ movie.fav_nums }}</div>
+                  <div class="fa fa-star-o right"></div>
+                  <div class="right">{{ movie.click_nums }}</div>
+                  <div class="fa fa-eye right"></div>
+                </div>
+              </div>
+              <div class="bette_video_author_content">
+                <div class="bette_video_author_content_tab" >{{ movie.name }}</div>
+                <div class="bette_video_author_content_content" >
+                    {{ movie.desc }}
+                </div>
+              </div>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+<div class="index-nav-title" style="background: url({% static 'images/diy_head.png' %}) 50% 101% no-repeat "></div>
+{#图片#}
+    {% for article in article_list %}
+    <div class="news-res clearfix" >
+      <div class="news-res-box" >
+        <div class="news-image" >
+          <img src="{{ MEDIA_URL }}{{ article.image }}" alt="" width="100%" height="270px">
+            <a href="{% url 'article:article_detail' article.id %}"><div class="news-res-mask clearfix" ></div></a>
+          <div class="news-category" >
+            <p>图片</p>
+            <p class="news-res-data">2016-5-12</p>
+          </div>
+        </div>
+        <p class="news-title">{{ article.name }}</p>
+
+        <div class="user-info" >
+          <div>{{ article.desc }}</div>
+          <div>
+            <span class="fa fa-eye"></span>
+            <span>{{ article.click_nums }}</span>
+            <span class="fa fa-star"></span>
+            <span>{{ article.fav_nums }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+
+
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/jquery.nivo.slider.pack.js' %}"></script>
+<script src="{% static 'js/jquery.flexslider-min.js' %}"></script>
+<script src="{% static 'js/radialIndicator.js' %}"></script>
+<script>
+
+$(function() {
+    var fa = $('.latest-news');
+    var newHover = true;
+    var newPass = true;
+    var proSpeed = 0;
+    var authorNum = 0;
+    var authorzIndex = 5;
+    var authorTab = $('.news-right-item');
+    var authorTabLength = $('.news-right-item').length;
+    authorTab.eq(authorNum).addClass('active').css({
+        zIndex: authorzIndex++
+    });
+
+    if (newHover) {
+    fa.on('mouseover', function () {
+      clearInterval(proTimer);
+    });
+    fa.on('mouseout', function () {
+      newPass = true;
+      clearInterval(proTimer);
+      proTime();
+
+    })
+  }
+
+    $('.news-left').nivoSlider({
+            controlNav: true,
+            animSpeed: 500,
+            manualAdvance: true,
+            prevText: '',
+            nextText: '',
+            afterLoad: function () {
+                proTime();
+            },
+            afterChange: function () {
+                proSpeed = 0;
+                radialObj.value(proSpeed);
+                authorChanger();
+                  clearInterval(proTimer);
+                  proTime();
+            },
+            beforeChange: function () {
+              clearInterval(proTimer);
+            }
+    });
+    $('.nivo-control').text('');
+
+
+
+function proTime() {
+        if (newPass) {
+          newPass = false;
+          window.proTimer = setInterval(function () {
+            proSpeed++;
+            radialObj.value(proSpeed);
+            if (proSpeed == 100) {
+              newPass = true;
+              $('.nivo-nextNav').click()
+            }
+          }, 50)
+        }
+}
+function authorChanger() {
+    $('.nivo-control').each(function (index, val) {
+      if ($(val).attr('class').indexOf('active') > 0) {
+        authorNum = index;
+      }
+    });
+
+    authorTab.each(function (index, val) {
+      $(val).removeClass('active');
+    });
+    authorTab.eq(authorNum).addClass('active').css({
+      zIndex: authorzIndex++
+    });
+}
+
+    var radialObj = radialIndicator('#indicatorContainer', {
+    barColor: 'rgba(0,120,255,1)',
+    barBgColor: 'rgba(0,0,0,0.5)',
+    barWidth: 5,
+    initValue: 0,
+    roundCorner: true,
+    displayNumber: false,
+    radius: 15
+  });
+
+
+    var unslider = $('.book-box').unslider({
+		speed: 500,               //  The speed to animate each slide (in milliseconds)
+		delay: 5000,              //  The delay between slide animations (in milliseconds)
+		complete: function() {},  //  A function that gets called after every slide animation
+		keys: true,               //  Enable keyboard (left, right) arrow shortcuts
+		dots: true,               //  Display dot navigation
+		fluid: false              //  Support responsive design. May break non-responsive designs
+	});
+
+    $('.unslider-arrow').click(function() {
+        var fn = this.className.split(' ')[1];
+        unslider.data('unslider')[fn]();
+    });
+
+    $('.movie-box').flexslider({
+        animation: "slide",
+        direction: "vertical",
+    })
+
+});
+</script>
+
+{% endblock %}

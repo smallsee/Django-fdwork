@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load staticfiles %}
+<head>
+	<meta charset="UTF-8">
+	<title>FD登录</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
+	<script type="text/javascript">
+	</script>
+</head>
+<body>
+<div id="fd">
+	<div class="form">
+		<form action="{% url 'login' %}" method="post">
+			<ul class="form-ul">
+				<li>
+                    <label><span><i class="fa fa-user"></i></span>账&nbsp;&nbsp;&nbsp;号:</label>
+                    <input {% if login_form.errors.username %}style="border: 1px solid red"{% endif %} type="text" name="username" required="" placeholder="请输入账号">
+                    <div class="error-msg">{{ login_form.errors.username }}</div>
+                </li>
+				<li><label><span><i class="fa fa-key"></i></span>密&nbsp;&nbsp;&nbsp;码:</label>
+                    <input {% if login_form.errors.password %}style="border: 1px solid red"{% endif %} type="password" name="password" required="" placeholder="请输入密码" >
+                    <div class="error-msg">{{ login_form.errors.password }}</div>
+                </li>
+
+                <li>
+                    <div style="color: red">{{ msg }}</div>
+                </li>
+
+                {#				<li id="code"><label><span><i class="fa fa-futbol-o"></i></span>验证码:</label><input  type="text" name="code" required="" placeholder="验证码"></li>#}
+{#				<img id="code_num" src="php/yanzhengma.php" onClick="this.src='php/yanzhengma.php?'+Math.random()">#}
+			    {% csrf_token %}
+            </ul>
+			<ul class="tijiao form-ul">
+				<li><input type="submit" value="登录"></li>
+				<li><a href="{% url 'register' %}"><input type="button" value="注册"></a></li>
+			</ul>
+
+		</form>
+	</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load staticfiles %}
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}FD动漫爱好网{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
+    {% block css %}{% endblock %}
+</head>
+<body>
+    <div class="header-wrapper">
+        <div class="header-content">
+            <div class="middle">
+                <div class="info">
+                    <a href="{% url 'index' %}"><div class="item"><span class="icon icon-tv"></span>主页</div></a>
+                    <div class="item">画友</div>
+                    <div class="item">游戏中心</div>
+                    <div class="item">直播</div>
+                    <div class="item">周边</div>
+                    <div class="item">萌战</div>
+                </div>
+                {% if request.user.is_authenticated %}
+                <div class="user">
+                    <a style=" color: #222;" href="{% url 'user:user_info' request.user.id %}"><div class="item">用户</div></a>
+                    <div class="item">消息</div>
+                    <div class="item">动态</div>
+                    <div class="item">收藏夹</div>
+                    <div class="item">历史</div>
+                    <div class="item">投稿</div>
+                    <a style=" color: #222;" href="{% url 'logout' %}"><div class="item">退出</div></a>
+                </div>
+                {% else %}
+                <div class="user">
+                    <a href="{% url 'login' %}"><div class="item">登录</div></a>
+                    <a href="{% url 'register' %}"><div class="item">注册</div></a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="header-bg">
+            <img class="bg-img" width="100%" src="http://oiq23viaf.bkt.clouddn.com/banner.png">
+        </div>
+    </div>
+
+    <div class="tab">
+            <div class="tab-item">
+                <span class="fa fa-home fa-2x"></span>
+                <a href="{% url 'index' %}">主页</a>
+            </div>
+            <div class="tab-item">
+                <span class="num">55</span>
+                <a href="{% url 'article:article_list' %}">茶会</a>
+            </div>
+            <div class="tab-item">
+                <span class="num">5z</span>
+                <a href="{% url 'book:book_list' %}">本子</a>
+            </div>
+            <div class="tab-item">
+                <span class="num">55</span>
+                <a href="{% url 'movie:movie_list' %}">视频</a>
+            </div>
+            <div class="tab-item">
+                <span class="num">55</span>
+                <a href="{% url 'music:music_list' %}">音乐</a>
+            </div>
+
+            <div class="tab-item">
+                <span class="num">55</span>
+                <a href="{% url 'resource:resource_list' %}">资源</a>
+            </div>
+
+            <div class="tab-item">
+                <span class="num">55</span>
+                <a href="{% url 'music:music_list' %}">小组</a>
+            </div>
+
+        </div>
+
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+
+    <footer class="footer">
+            底部
+    </footer>
+
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/unslider.js' %}"></script>
+{% block js %}{% endblock %}
+</body>
+</html>

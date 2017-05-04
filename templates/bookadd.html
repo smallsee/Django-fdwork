@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}FD动漫爱好网-本子添加{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bookadd.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'js/Semantic-UI-CSS-master/semantic.css' %}">
+{% endblock %}
+
+{% block content %}
+
+
+<form class="ui form" action="{% url 'book:book_add' %}" enctype="multipart/form-data" method="post">
+  <h4 class="ui dividing header">本子添加</h4>
+  <div class="field">
+    <div class="ui labeled input">
+      <a class="ui label">
+        名字
+      </a>
+      <input name="name" type="text" placeholder="请填写本子名字">
+    </div>
+  </div>
+        <div class="field">
+    <div class="ui labeled input">
+      <a class="ui label">
+        图片
+      </a>
+      <input type="file" name="image" id="avatarUp" class="js-img-up"/>
+    </div>
+  </div>
+    <div class="field">
+    <div class="ui labeled input">
+      <a class="ui label">
+        描述
+      </a>
+      <input name="desc" type="text" placeholder="请填写描述">
+    </div>
+  </div>
+  <div class="field">
+      <div class="ui labeled input">
+      <a class="ui label">
+        详情
+      </a>
+      <textarea id="editor_id" name="book_list"></textarea>
+    </div>
+
+  </div>
+ <div class="field">
+  <div class="ui labeled input">
+      <a class="ui label">
+        类型
+      </a>
+  <select class="ui fluid dropdown" name="tag">
+              <option value="dmtj">动漫图集</option>
+            <option value="zzhj">杂志画集</option>
+            <option value="wztj">网站推荐</option>
+            <option value="yxcg">游戏CG</option>
+            <option value="grzh">个人杂画</option>
+  </select>
+ </div>
+ </div>
+{% csrf_token %}
+    </div>
+    <div class="field">
+    <div class="ui labeled input">
+
+      <input  type="submit" >
+    </div>
+  </div>
+</form>
+{% endblock %}
+
+
+
+{% block js %}
+    <script src="{% static 'js/kindeditor/kindeditor-all-min.js' %}"></script>
+    <script src="{% static 'js/kindeditor/lang/zh-CN.js' %}"></script>
+
+<script>
+    /**
+ * Created by Administrator on 2017/4/14.
+ */
+
+
+KindEditor.ready(function(K){
+    K.create('#editor_id',{
+        width:500,
+        height:200,
+        uploadJson: '/book/upload/kindeditor',
+        afterBlur: function(){this.sync();}
+    })
+})
+</script>
+
+
+{% endblock %}

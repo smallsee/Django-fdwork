@@ -1,0 +1,210 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}FD动漫爱好网-音乐列表{% endblock %}
+
+{% block css %}
+
+        <link rel="stylesheet" type="text/css" href="{% static 'css/flexslider.css' %}">
+    <link rel="stylesheet" href="{% static 'css/resource.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="music-banner">
+        <img src="{% static 'images/forum_header50.jpg' %}" alt="" width="100%">
+    </div>
+
+    <div class="resource-banner clearfix">
+        <ul>
+            <li class="banner-item">
+                <div class="item-image">
+                    <img src="{% static 'images/avatar.png' %}" alt="" width="100%" height="100%">
+                    <div class="tag">激情</div>
+                </div>
+                <div class="item-desc">
+                    sadsadssadas
+                </div>
+            </li>
+            <li class="banner-item">
+                <div class="item-image">
+                    <img src="{% static 'images/avatar.png' %}" alt="" width="100%" height="100%">
+                    <div class="tag">激情</div>
+                </div>
+                <div class="item-desc">
+                    sadsadssadas
+                </div>
+            </li>
+            <li class="banner-item">
+                <div class="item-image">
+                    <img src="{% static 'images/avatar.png' %}" alt="" width="100%" height="100%">
+                    <div class="tag">激情</div>
+                </div>
+                <div class="item-desc">
+                    sadsadssadas
+                </div>
+            </li>
+            <li class="banner-item">
+                <div class="item-image">
+                    <img src="{% static 'images/avatar.png' %}" alt="" width="100%" height="100%">
+                    <div class="tag">激情</div>
+                </div>
+                <div class="item-desc">
+                    sadsadssadas
+                </div>
+            </li>
+            <li class="banner-item">
+                <div class="item-image">
+                    <img src="{% static 'images/avatar.png' %}" alt="" width="100%" height="100%">
+                    <div class="tag">激情</div>
+                </div>
+                <div class="item-desc">
+                    sadsadssadas
+                </div>
+            </li>
+            <li class="banner-item">
+                <div class="item-image">
+                    <img src="{% static 'images/avatar.png' %}" alt="" width="100%" height="100%">
+                    <div class="tag">激情</div>
+                </div>
+                <div class="item-desc">
+                    sadsadssadas
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="resource-wrap clearfix">
+        <div class="resource-left">
+            <div class="category">
+                <h3>分类目录</h3>
+                <ul>
+                    <li>
+                        <span class="fa fa-angle-right icon"></span>
+                        <a href="?tag=" class="{% if tag == '' %}active{% endif %}"><span>全部</span></a>
+                    </li>
+                    <li>
+                        <span class="fa fa-angle-right icon"></span>
+                        <a href="?tag=rj" class="{% if tag == 'rj' %}active{% endif %}"><span>软件</span></a>
+                    </li>
+                    <li>
+                        <span class="fa fa-angle-right icon"></span>
+                        <a href="?tag=sr" class="{% if tag == 'sr' %}active{% endif %}"><span>生肉</span></a>
+                    </li>
+                    <li>
+                        <span class="fa fa-angle-right icon"></span>
+                        <a href="?tag=game" class="{% if tag == 'game' %}active{% endif %}"><span>游戏</span></a>
+                    </li>
+                    <li>
+                        <span class="fa fa-angle-right icon"></span>
+                        <a href="?tag=jc" class="{% if tag == 'jc' %}active{% endif %}"><span>教程</span></a>
+                    </li>
+                    <li>
+                        <span class="fa fa-angle-right icon"></span>
+                        <a href="?tag=qt" class="{% if tag == 'qt' %}active{% endif %}"><span>其他</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="resource-main">
+
+            <div class="resource-box flexslider">
+                <ul class="slides">
+                    <li class="resource-box-item" >
+                        <img src="{% static 'images/bg2.jpg' %}" alt="">
+                    </li>
+                    <li class="resource-box-item" >
+                         <img src="{% static 'images/bg6.jpg' %}" alt="">
+                    </li>
+                </ul>
+            </div>
+
+            {% for resource in resource_list.object_list %}
+            <div class="resource-item-wrap clearfix">
+                <div class="resource-thumbnail">
+                    <a href="{% url 'resource:resource_detail' resource.id %}"><img src="{{ MEDIA_URL }}{{ resource.image }}" alt=""></a>
+                </div>
+                <div class="resource-info clearfix">
+                    <div class="resource-mxh">
+                        <h3 class="resource-title">{{ resource.name }}</h3>
+                        <div class="resource-desc">{{ resource.desc }}</div>
+                    </div>
+                    <div class="resource-foot clearfix">
+                        <ul>
+                            <li>
+                                <span class="fa fa-database"></span>
+                                <span>{{ resource.add_time }}</span>
+                            </li>
+                            <li>
+                                <span class="fa fa-eye"></span>
+                                <span>{{ resource.click_nums }}</span>
+                            </li>
+                            <li>
+                                <span class="fa fa-commenting"></span>
+                                <span>{{ resource.fav_nums }}</span>
+                            </li>
+
+                            <li>
+                                <a href="{% url 'resource:resource_detail' resource.id %}"><span>阅读全文</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        
+            <div class="pageturn">
+
+                    <ul class="pagelist">
+                        {% if resource_list.has_previous %}
+                            <li class="long"><a href="?{{ resource_list.previous_page_number.querystring }}">上一页</a></li>
+                        {% endif %}
+
+                        {% for page in resource_list.pages %}
+                            {% if page %}
+                                {% ifequal page resource_list.number %}
+                                    <li class="active"><a href="?{{ page.querystring }}">{{ page }}</a></li>
+                                {% else %}
+                                    <li><a href="?{{ page.querystring }}" class="page">{{ page }}</a></li>
+                                {% endifequal %}
+                            {% else %}
+                                <li class="none"><a href="">...</a></li>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if resource_list.has_next %}
+                            <li class="long"><a href="?{{ resource_list.next_page_number.querystring }}">下一页</a></li>
+                        {% endif %}
+                    </ul>
+        </div>
+
+        </div>
+
+        <div class="resource-right">
+            <div class="new-resource">
+                <h3>最新目录</h3>
+                <ul>
+                    {% for new_resource in resource_list.object_list %}
+                    <li class="clearfix">
+                        <div class="img"><img src="{{ MEDIA_URL }}{{ new_resource.image }}" alt="" width="100%" height="100%"></div>
+                        <a href="{% url 'resource:resource_detail' new_resource.id %}"><div class="new-resource-desc">
+                            {{ new_resource.desc }}
+                        </div></a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block js %}
+<script src="{% static 'js/jquery.flexslider-min.js' %}"></script>
+<script>
+$(function() {
+    $('.resource-box').flexslider({
+    animation: "slide"
+})
+})
+
+</script>
+{% endblock %}

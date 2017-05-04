@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load staticfiles %}
+<head>
+	<meta charset="UTF-8">
+	<title>FD注册</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+</head>
+<body>
+
+<div id="fd">
+	<div class="form">
+		<form id="email_register_form" action="{% url 'register' %}" method="post">
+			<ul class="form-ul">
+				<li>
+                    <label><span><i class="fa fa-envelope"></i></span>邮箱地址 :</label>
+                    <input {% if register_form.errors.email %}style="border: 1px solid red"{% endif %} id="q3" type="text" name="email" required="" placeholder="请输入邮箱址必填"><span id="w3">{{ register_form.errors.email }}</span>
+                </li>
+				<li>
+                    <label><span><i class="fa fa-key"></i></span>注册密码 :</label>
+                    <input {% if register_form.errors.password %}style="border: 1px solid red"{% endif %} id="q2"  type="text" name="password" required="" placeholder="请输入密码必填"><span id="w2">{{ register_form.errors.password }}</span>
+                </li>
+                <li id="code" >
+                    <label><span><i class="fa fa-envelope"></i></span>验证  码 :</label>{{ register_form.captcha }}
+                    <span id="w4">{{ register_form.errors.captcha }}</span>
+                </li>
+                {#				<li><label><span>&#xf098;</span>电话号码:</label><input id="q4" type="text" name="phone" required="" placeholder="请输入电话号码必填"><span id="w4"></span></li>#}
+				{% csrf_token %}
+                <li class="button">
+					<input type="submit" value="注册">
+					<input type="reset" value="重置">
+				</li>
+			</ul>
+		</form>
+	</div>
+</div>
+<script>
+function refresh_captcha(event){
+    $.get("/captcha/refresh/?"+Math.random(), function(result){
+        $('#'+event.data.form_id+' .captcha').attr("src",result.image_url);
+        $('#id_captcha_0').attr("value",result.key);
+    });
+    return false;
+}
+
+$('#email_register_form .captcha-refresh').click({'form_id':'email_register_form'},refresh_captcha);
+$('#email_register_form .captcha').click({'form_id':'email_register_form'},refresh_captcha);
+
+
+</script>
+</body>
+</html>

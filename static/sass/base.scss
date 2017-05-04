@@ -1,0 +1,124 @@
+@import "mixin";
+
+
+@font-face {
+    font-family: 'xiaohai';
+    src: url('../fonts/HYQingKongTiJ.ttf');
+}
+.header-wrapper{
+        position: relative;
+        width: 100%;
+        height: 170px;
+        .header-content{
+            position: absolute;
+            top:0;
+            left:0;
+            width: 100%;
+            height: 56px;
+            background-color: rgba(255,255,255,0.4);
+            z-index:5;
+            .middle{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                margin: 0 auto;
+                width: 1160px;
+                height: 100%;
+                line-height: 56px;
+                font-size: 13px;
+                color: #222;
+                .info{
+                    .item{
+                        display: inline-block;
+                        cursor: pointer;
+                        padding: 0 15px;
+                        &:hover{
+                            background-color: rgba(255,255,255,0.4);
+                        }
+                        .icon{
+                            margin-right: 4px;
+                            color: #20A0FF;
+                        }
+                    }
+                }
+                .user{
+                    .item{
+                        display: inline-block;
+                        cursor: pointer;
+                        padding: 0 15px;
+                        &:hover{
+                            background-color: rgba(255,255,255,0.4);
+                        }
+                        .icon{
+                            margin-right: 4px;
+                            color: #20A0FF;
+                        }
+                    }
+                }
+            }
+        }
+        .header-bg{
+            width:100%;
+            height: 170px;
+            overflow: hidden;
+            .bg-img{
+                width:100%;
+                height: 170px;
+                min-width: 1160px;
+            }
+        }
+    }
+
+.tab{
+        width: 1160px;
+        height: 50px;
+        margin: 0 auto;
+        .tab-item{
+            display: inline-block;
+            padding-left: 0;
+            padding-right: 20px;
+            padding-top: 10px;
+            text-align: center;
+            &:hover{
+                a{
+                    color: #1D8CE0;
+                }
+            }
+            &:last-child{
+                padding-right: 0;
+            }
+            a{
+                line-height: 25px;
+                font-size: 14px;
+                color: #222;
+            }
+            .num{
+                display: block;
+                font-size: 12px;
+                line-height: 18px;
+                background: rgb(255, 175, 201);
+                border-radius: 4px;
+                color: #fff;
+            }
+            .fa-home{
+                display: block;
+                line-height: 18px;
+                color: rgb(255, 175, 201);
+
+            }
+        }
+    }
+
+.content{
+    overflow: hidden;
+    margin: 20px auto;
+    width: 1160px;
+}
+
+.footer{
+    overflow: hidden;
+    margin: 20px auto;
+    padding-top: 10px;
+    width: 1160px;
+    @include border-top-1px(rgba(7,17,27,0.2));
+}

@@ -1,0 +1,213 @@
+{% extends 'usercenter-base.html' %}
+{% load staticfiles %}
+
+{% block title %}FD动漫爱好网-本子列表{% endblock %}
+
+{% block content %}
+
+    <div class="hr"></div>
+
+
+
+        <div class="user-category-wrapper clearfix">
+            <div class="user-title" >
+            <div class="user-title-box" >
+              <div class="desc" >投稿本子</div>
+              <div class="badge" ></div>
+              <div class="news" >最新发布</div>
+              <div class="see" >最多播放</div>
+            </div>
+
+
+            <div class="more" >
+                <a href="{% url 'user:user_movie' user_info.id %}">更多 ></a>
+            </div>
+
+          </div>
+
+
+
+            {% for book in book_user %}
+            <div  class="user-video-box" >
+              <a href="{% url 'book:book_detail' book.id %}"><img src="{{ MEDIA_URL }}{{ book.image }}" alt="" width="100%" height="100px"></a>
+              <p class="desc">{{ book.desc }}</p>
+              <div class="see-box" >
+                <div class="see-item" >
+                  <span>播放:</span>
+                  <span >{{ book.click_nums }}</span>
+                </div>
+
+                <div class="see-item" >
+                  <span>收藏:</span>
+                  <span>{{ book.fav_nums }}</span>
+                </div>
+
+              </div>
+            </div>
+            {% endfor %}
+        </div>
+
+
+      <div class="hr"></div>
+
+
+            <div class="user-category-wrapper clearfix">
+            <div class="user-title" >
+            <div class="user-title-box" >
+              <div class="desc" >投稿视频</div>
+              <div class="badge" ></div>
+              <div class="news" >最新发布</div>
+              <div class="see" >最多播放</div>
+            </div>
+
+            <div class="more" >
+            更多 >
+            </div>
+
+          </div>
+
+
+
+            {% for movie in movie_user %}
+            <div  class="user-video-box" >
+              <a href="{% url 'movie:movie_detail' movie.id %}"><img src="{{ MEDIA_URL }}{{ movie.image }}" alt="" width="100%" height="100px"></a>
+              <p class="desc">{{ movie.desc }}</p>
+              <div class="see-box" >
+                <div class="see-item" >
+                  <span>播放:</span>
+                  <span >{{ movie.click_nums }}</span>
+                </div>
+
+                <div class="see-item" >
+                  <span>收藏:</span>
+                  <span>{{ movie.fav_nums }}</span>
+                </div>
+
+              </div>
+            </div>
+            {% endfor %}
+        </div>
+
+
+      <div class="hr"></div>
+
+            <div class="user-category-wrapper clearfix">
+            <div class="user-title" >
+            <div class="user-title-box" >
+              <div class="desc" >投稿文章</div>
+              <div class="badge" ></div>
+              <div class="news" >最新发布</div>
+              <div class="see" >最多播放</div>
+            </div>
+
+            <div class="more" >
+            更多 >
+            </div>
+
+          </div>
+
+
+
+            {% for article in article_user %}
+            <div  class="user-video-box" >
+              <a href="{% url 'article:article_detail' article.id %}"><img src="{{ MEDIA_URL }}{{ article.image }}" alt="" width="100%" height="100px"></a>
+              <p class="desc">{{ article.desc }}</p>
+              <div class="see-box" >
+                <div class="see-item" >
+                  <span>播放:</span>
+                  <span >{{ article.click_nums }}</span>
+                </div>
+
+                <div class="see-item" >
+                  <span>收藏:</span>
+                  <span>{{ article.fav_nums }}</span>
+                </div>
+
+              </div>
+            </div>
+            {% endfor %}
+        </div>
+
+      <div class="hr"></div>
+
+
+        <div class="user-category-wrapper clearfix">
+            <div class="user-title" >
+            <div class="user-title-box" >
+              <div class="desc" >投稿音乐</div>
+              <div class="badge" ></div>
+              <div class="news" >最新发布</div>
+              <div class="see" >最多播放</div>
+            </div>
+
+
+            <div class="more" >
+                <a href="{% url 'user:user_movie' user_info.id %}">更多 ></a>
+            </div>
+
+          </div>
+
+
+
+            {% for music in music_user %}
+            <div  class="user-video-box" >
+              <a href="{% url 'music:music_detail' music.id %}"><img src="{{ MEDIA_URL }}{{ music.image }}" alt="" width="100%" height="100px"></a>
+              <p class="desc">{{ music.desc }}</p>
+              <div class="see-box" >
+                <div class="see-item" >
+                  <span>播放:</span>
+                  <span >{{ music.click_nums }}</span>
+                </div>
+
+                <div class="see-item" >
+                  <span>收藏:</span>
+                  <span>{{ music.fav_nums }}</span>
+                </div>
+
+              </div>
+            </div>
+            {% endfor %}
+        </div>
+
+
+      <div class="hr"></div>
+
+        <div class="user-category-wrapper clearfix">
+            <div class="user-title" >
+            <div class="user-title-box" >
+              <div class="desc" >投稿资源</div>
+              <div class="badge" ></div>
+              <div class="news" >最新发布</div>
+              <div class="see" >最多播放</div>
+            </div>
+
+
+            <div class="more" >
+                <a href="{% url 'user:user_movie' user_info.id %}">更多 ></a>
+            </div>
+
+          </div>
+
+
+
+            {% for resource in resource_user %}
+            <div  class="user-video-box" >
+              <a href="{% url 'resource:resource_detail' resource.id %}"><img src="{{ MEDIA_URL }}{{ resource.image }}" alt="" width="100%" height="100px"></a>
+              <p class="desc">{{ resource.desc }}</p>
+              <div class="see-box" >
+                <div class="see-item" >
+                  <span>播放:</span>
+                  <span >{{ resource.click_nums }}</span>
+                </div>
+
+                <div class="see-item" >
+                  <span>收藏:</span>
+                  <span>{{ resource.fav_nums }}</span>
+                </div>
+
+              </div>
+            </div>
+            {% endfor %}
+        </div>
+
+{% endblock %}

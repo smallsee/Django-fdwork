@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}FD动漫爱好网-资源添加{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bookadd.css' %}">
+{% endblock %}
+
+{% block content %}
+    <form id="jsAvatarForm" action="{% url 'resource:resource_add' %}" enctype="multipart/form-data" method="post" style="margin-bottom: 50px">
+
+        <select name="tag">
+            <option value="rj">软件</option>
+            <option value="sr">生肉</option>
+            <option value="game">游戏</option>
+            <option value="qt">教程</option>
+            <option value="qt">其他</option>
+        </select>
+
+        <input type="file" name="image" id="avatarUp" class="js-img-up"/>
+
+        名字：<input type="text" name="name" />
+
+        描述<input type="text" name="desc" />
+
+        资源地址<input type="text" name="resource_url" />
+
+        <textarea id="editor_id" name="detail"></textarea>
+        {% csrf_token %}
+        <input type="submit">
+    </form>
+
+{% endblock %}
+
+
+
+{% block js %}
+    <script src="{% static 'js/kindeditor/kindeditor-all-min.js' %}"></script>
+    <script src="{% static 'js/kindeditor/lang/zh-CN.js' %}"></script>
+
+<script>
+    /**
+ * Created by Administrator on 2017/4/14.
+ */
+
+
+KindEditor.ready(function(K){
+    K.create('#editor_id',{
+        width:500,
+        height:200,
+        uploadJson: '/book/upload/kindeditor',
+        afterBlur: function(){this.sync();}
+    })
+})
+</script>
+
+
+{% endblock %}

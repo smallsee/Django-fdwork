@@ -1,0 +1,281 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}FD动漫爱好网-视频详情页{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/moviedetail.css' %}">
+     <link rel="stylesheet" href="{% static 'js/video.js/dist/video-js.css' %}">
+{% endblock %}
+
+
+
+{% block content %}
+    <div class="videoDetail">
+      <!--<el-button @click="show" type="primary">回退</el-button>-->
+
+      <div class="detail-info">
+        <div class="detail-container">
+          <div class="left">
+            <h1 class="title">{{ movie.name }}</h1>
+            <div class="info">
+              <div class="category">
+                <span class="type">主页</span>
+                <span class="fa fa-angle-right"></span>
+                <a href="{% url 'movie:movie_list' %}"><span class="type">视频</span></a>
+                <span class="fa fa-angle-right"></span>
+                <span class="type">{{ movie.get_category_display }}</span>
+                <span class="fa fa-angle-right"></span>
+                <span class="type">{{ movie.name }}</span>
+              </div>
+
+              <span class="date">{{ movie.add_time }}</span>
+              <span class="_id">{{ movie.id }}</span>
+            </div>
+
+            <div class="play-info">
+              <div class="play-item">
+                <span class="icon fa fa-youtube-play"></span>
+                <span class="num">{{ movie.click_nums }}</span>
+              </div>
+
+              <div class="play-item">
+                <span class="icon fa fa-commenting"></span>
+                <span class="num">sss</span>
+              </div>
+
+              <div  class="play-item">
+                {% if has_fav_movie %}
+                    <span class="icon fa fa-star"></span>
+                    <span id="jsLeftBtn" style="cursor: pointer" class="num">已收藏 {{ movie.fav_nums }}</span>
+                  {% else %}
+                    <span class="icon fa fa-star-o"></span>
+                <span id="jsLeftBtn" style="cursor: pointer" class="num">收藏  {{ movie.fav_nums }}</span>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          <div class="right">
+            <img src="{{ MEDIA_URL }}{{ movie.user.image }}" width="68" height="68">
+            <div class="user-info">
+              <h1 class="name">{{ movie.user.nick_name }}</h1>
+              <p class="desc"></p>
+              <div class="welcome">
+                  <span>投稿: 17</span><span>粉丝: 17</span>
+              </div>
+
+              <div class="action">
+                <a href="index.html"><div class="care"><span class="icon el-icon-plus"></span>关注</div></a>
+                <div class="battery">充电</div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="detail-content">
+        <div class="detail-container">
+
+        {% if movie.category != 'fj' %}
+            {% if lesson_count > 1  %}
+                <div class="lesson-box" style="">
+                    {% for lesson in  lesson_list  %}
+
+                        <a  href="?video_id={{ forloop.counter|add:-1 }} ">
+                            <div class="lesson-item {% if forloop.counter|add:-1 == video_id %}active{% endif %}" style="">
+                                {{ lesson.video_name }}
+                            </div>
+                        </a>
+
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endif %}
+
+
+          <video
+                  id="my-player"
+                  class="video video-js"
+                 controls
+                 preload="auto"
+                 data-setup='{}'
+          >
+            <source src="{{ video_url.url }}" type="video/mp4"></source>
+          </video>
+
+
+
+          <div class="arc-toobar">
+            <div class="item">
+              <span class="icon fa fa-user"></span>
+              <div class="content">
+                <h2 class="title">分享</h2>
+                <p class="num">192</p>
+              </div>
+            </div>
+            <div class="item">
+              <span class="icon fa fa-user"></span>
+              <div class="content">
+                <h2 class="title">分享</h2>
+                <p class="num">192</p>
+              </div>
+            </div>
+            <div class="item">
+              <span class="icon fa fa-user"></span>
+              <div class="content">
+                <h2 class="title">分享</h2>
+                <p class="num">192</p>
+              </div>
+            </div>
+            <div class="item">
+              <span class="icon fa fa-user"></span>
+              <div class="content">
+                <h2 class="title">分享</h2>
+                <p class="num">192</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="detail-bottom">
+        <div class="left">
+          <div class="desc">{{ movie.detail }}</div>
+          <div class="love other">
+
+          </div>
+
+          <div class="commit">
+            <div class="commit-header">
+              <div class="commit-desc">
+                <span class="active">最新评论</span>
+                <span>热门评论</span>
+              </div>
+              <div class="commit-fengye">
+                <ul>
+
+
+                {% for page in comment_list.pages %}
+                    {% if page %}
+                        {% ifequal page comment_list.number %}
+                            <li class="active"><a href="?{{ page.querystring }}">{{ page }}</a></li>
+                        {% else %}
+                            <li><a href="?{{ page.querystring }}" class="page">{{ page }}</a></li>
+                        {% endifequal %}
+                    {% else %}
+                        <li class="none"><a href="">...</a></li>
+                    {% endif %}
+                {% endfor %}
+
+
+                </ul>
+              </div>
+            </div>
+            <div class="commit-left">
+
+            <div class="comment-item" style="border-bottom: 1px solid rgba(7,17,27,0.4)">
+              <div class="thumb">
+                <img src="{{ MEDIA_URL }}{{ request.user.image }}" width="48" height="48">
+              </div>
+              <div class="commit-text">
+                <textarea id="pust-comment">请在这里添加上你的评论吧!</textarea>
+              </div>
+              <div class="put-text" onclick="pust_comment()"><p>
+                  发表
+              </p></div>
+            </div>
+
+
+            {% for comment in comment_list.object_list %}
+            <div class="comment-item">
+              <div class="thumb">
+                <img src="{{ MEDIA_URL }}{{ comment.user.image }}" width="48" height="48">
+              </div>
+              <div class="commit-text">
+                {{ comment.comments }}
+              </div>
+            </div>
+            {% endfor %}
+
+            </div>
+            <div class="commit-right">
+
+            </div>
+          </div>
+        </div>
+
+        <div class="right"></div>
+      </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/video.js/dist/video.min.js' %}"></script>
+<script>
+
+
+function pust_comment(current_elem){
+    console.log('sss');
+    $.ajax({
+        cache: false,
+        type: "POST",
+        url:"{% url "user:add_commit" %}",
+        data:{'comments_type':1, 'comments_id':{{ movie.id }}, 'comments': $('#pust-comment').val() },
+        async: true,
+        beforeSend:function(xhr, settings){
+            xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+        },
+        success: function(data) {
+            if(data.status == 'fail'){
+                alert('失败')
+            }else if(data.status == 'success'){
+                location.href = "{% url 'movie:movie_detail' movie.id %}";
+            }
+        },
+    });
+}
+
+$(function () {
+    var options = {};
+
+    var player = videojs('my-player', options, function onPlayerReady() {
+      videojs.log('Your player is ready!');
+
+      // In this context, `this` is the player that was created by Video.js.
+
+
+      // How about an event listener?
+      this.on('ended', function() {
+        videojs.log('Awww...over so soon?!');
+      });
+    });
+})
+
+
+
+function add_fav(current_elem, fav_id, fav_type){
+    $.ajax({
+        cache: false,
+        type: "POST",
+        url:"{% url "user:add_fav" %}",
+        data:{'fav_id':fav_id, 'fav_type':fav_type},
+        async: true,
+        beforeSend:function(xhr, settings){
+            xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+        },
+        success: function(data) {
+            if(data.status == 'fail'){
+                if(data.msg == '用户未登录'){
+                    window.location.href="/login/";
+                }
+            }else if(data.status == 'success'){
+                current_elem.text(data.msg)
+            }
+        },
+    });
+}
+$('#jsLeftBtn').on('click', function(){
+    add_fav($(this), {{ movie.id }}, 1);
+});
+</script>
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}FD动漫爱好网-本子列表{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/article.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="xiaohai-container" style="background-color: #efefef;margin-top: 10px;">
+    <div id="rule-tea">
+  <div class="left"></div>
+  <ul>
+    <li class="{% if tag == '' %}active{% endif %}"><a href="?tag=">全部</a></li>
+    <li class="{% if tag == 'jl' %}active{% endif %}"><a href="?tag=jl">交流</a></li>
+    <li class="{% if tag == 'dhzx' %}active{% endif %}"><a href="?tag=dhzx">动画资讯</a></li>
+    <li class="{% if tag == 'qtzx' %}active{% endif %}"><a href="?tag=qtzx">其他资讯</a></li>
+    <li class="{% if tag == 'fdsw' %}active{% endif %}"><a href="?tag=fdsw">茶会事务</a></li>
+  </ul>
+
+  <div class="all_rule">
+    <h2>论坛bug反馈&建议(仮)</h2>
+    <p>如图说明：</p>
+    <p>第一 本帖回复需与论坛bug，系统错误，建议有关，无关内容会被删帖，请勿在此水帖；</p>
+    <p></p>
+    <p></p>
+  </div>
+</div>
+{% for article in article_comment %}
+<div class="tea-tool">
+      <div class="left">
+        <div class="title">
+          <p class="bottom-boder"><a href="#">茶会资讯</a></p>
+          <p>POSTED BY</p>
+          <p class="bottom-boder"><a href="#">{{ article.user.nick_name }}</a></p>
+          <p>POSTED IN</p>
+          <p class="bottom-boder">{{ article.add_time }}</p>
+          <p>COMMENTS</p>
+          <p class="bottom-boder">{{ article.article_comment_count }}次評價</p>
+        </div>
+      </div>
+      <div class="right">
+        <div class="content">
+          <h2>{{ article.name }}</h2>
+          <div style="overflow: hidden">
+            <a href="{% url 'article:article_detail' article.id %}">
+              <img  class="tea-thumb"  src="{{ MEDIA_URL }}{{ article.image }}" alt="" width="100%">
+            </a>
+          </div>
+          <p style="margin-top: 20px;overflow:hidden;text-overflow:ellipsis;height: 80px">{{ article.desc }}</p>
+        </div>
+        <div class="last">
+          <span>最新評論</span>
+          <ul>
+
+              {% for comment in article.comments  %}
+                  {% if forloop.counter < 4 %}
+                <li>
+                  <img  src="{{ MEDIA_URL }}{{ comment.user.image }}" alt="1" />
+                  <p style="overflow:hidden;text-overflow:ellipsis; -o-text-overflow:ellipsis;white-space:nowrap;" >{{ comment.comments }}</p>
+                </li>
+                  {% endif %}
+              {% endfor %}
+
+
+          </ul>
+        </div>
+      </div>
+</div>
+{% endfor %}
+
+</div>
+{% endblock %}

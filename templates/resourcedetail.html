@@ -1,0 +1,208 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}FD动漫爱好网-本子详情页{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bookdetail.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="commit-box-mask" >
+    <div class="commit-box">
+
+            <textarea id="pust-comment" cols="5" rows="11" name="comments"></textarea>
+            {% csrf_token %}
+            <div onclick="pust_test()" class="commit-btn">
+                <input type="button" value="重置"/>
+            </div>
+            <div id="pust-comment" onclick="pust_comment()" class="commit-btn">
+                <input type="button" value="提交"/>
+            </div>
+            <div class="commit-btn" onclick="hidecomment()">
+                <input type="button" value="关闭"/>
+            </div>
+
+    </div>
+</div>
+
+<div class="clearfix book_list"  >
+  <div class="book_list_left">
+    <div class="user-info">
+      <img src="{{ MEDIA_URL }}{{ resource.user.image }}" alt="">
+      <div style="text-align: center;width: 150px;color: #fff;line-height: 20px;text-overflow:ellipsis;white-space:nowrap;overflow: hidden">{{ resource.user.nick_name }}</div>
+    </div>
+</div>
+  <div class="book_list_right">
+    <div class="title clearfix">
+       {{ resource.name }}
+
+    </div>
+
+    <div class="content">
+
+      <div class="time">
+           <div class="title-box">
+        <i style="color: #F6697A" class="fa fa-clock-o fa-2x"></i>
+        <span>{{ resource.add_time }}</span>
+           </div>
+          <div id="jsLeftBtn" class="collect">
+              {% if  has_fav_book %}
+                    已收藏
+                  {% else %}
+                  收藏
+              {% endif %}
+          </div>
+      </div>
+
+      <div class="content_image">
+
+        <div  style="text-indent:2em;word-wrap:break-word;word-break:break-all;" class="book-list-item-content"></div>
+        <div id="book-list">
+            {% autoescape off %}
+                {{ resource.detail }}
+            {% endautoescape %}
+{#          <img  data-role="lightbox"#}
+{#                data-source="{% static 'images/bg25.jpg' %}"#}
+{#                src="{% static 'images/bg25.jpg' %}"#}
+{#                data-group="group-33"#}
+{#                data-id="1 - 1"#}
+{#                data-caption="littleSea">#}
+        </div>
+      </div>
+
+
+    {% if ishide %}
+      <div class="hide_thing">
+          <p onclick="showcomment()" style="cursor: pointer">回复获取隐藏东西</p>
+      </div>
+    {% else %}
+      <div class="hide_thing">
+        asdsadsadsadsadsa
+      </div>
+    {% endif %}
+    </div>
+  </div>
+</div>
+
+{% for user_comment in comment_list %}
+<div>
+    <div class="clearfix book_list book_commit"  >
+      <div class="book_list_left">
+        <div class="user-info">
+          <img src="{{ MEDIA_URL }}{{ user_comment.user.image }}" alt="">
+          <div style="text-align: center;width: 150px;color: #fff;line-height: 20px;text-overflow:ellipsis;white-space:nowrap;overflow: hidden">{{ user_comment.user.nick_name }}</div>
+
+        </div>
+      </div>
+      <div class="book_list_right">
+
+        <div class="content">
+
+          <div class="time">
+            <i style="color: #F6697A" class="fa fa-clock-o fa-2x"></i>
+            <span> {{ user_comment.add_time }}</span>
+          </div>
+
+          <div class="content_image">
+            <div  style="text-indent:2em;word-wrap:break-word;word-break:break-all;">
+                {{ user_comment.comments }}
+            </div>
+            <span class="content_commit">{{ forloop.counter }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+
+
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'js/picture.js' %}"></script>
+<script>
+$(function () {
+    var booklist = $('#book-list img');
+
+    booklist.each(function(index,value){
+        var data_source = $(value).attr('src');
+         $(value).attr({
+            'data-role': 'lightbox',
+            'data-source': data_source,
+            'data-group': "group-1",
+            'data-id': "1-"+ index,
+            'data-caption':'{{ book.name }}'
+        });
+    });
+
+  var lightbox = new LightBox({
+    speed:300,
+    maxWidth:'auto',
+    maxHeight:'auto',
+    maskOpacity:0.5,
+    scalePic:1
+  });
+})
+
+function showcomment(){
+    $('.commit-box-mask').css({
+        'display': 'block'
+    })
+}
+function hidecomment(){
+    $('.commit-box-mask').css({
+        'display': 'none'
+    })
+}
+function pust_test(){
+    $('#pust-comment').val('')
+}
+function pust_comment(current_elem){
+    $.ajax({
+        cache: false,
+        type: "POST",
+        url:"{% url "user:add_commit" %}",
+        data:{'comments_type':5, 'comments_id':{{ resource.id }}, 'comments': $('#pust-comment').val() },
+        async: true,
+        beforeSend:function(xhr, settings){
+            xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+        },
+        success: function(data) {
+            if(data.status == 'fail'){
+                alert('失败')
+            }else if(data.status == 'success'){
+                location.href = "{% url 'resource:resource_detail' resource.id %}";
+            }
+        },
+    });
+}
+
+function add_fav(current_elem, fav_id, fav_type){
+    $.ajax({
+        cache: false,
+        type: "POST",
+        url:"{% url "user:add_fav" %}",
+        data:{'fav_id':fav_id, 'fav_type':fav_type},
+        async: true,
+        beforeSend:function(xhr, settings){
+            xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+        },
+        success: function(data) {
+            if(data.status == 'fail'){
+                if(data.msg == '用户未登录'){
+                    window.location.href="/login/";
+                }
+            }else if(data.status == 'success'){
+                current_elem.text(data.msg)
+            }
+        },
+    });
+}
+$('#jsLeftBtn').on('click', function(){
+    add_fav($(this), {{ resource.id }}, 5);
+});
+
+</script>
+{% endblock %}

@@ -1,0 +1,269 @@
+@import "mixin";
+
+body{
+  background-color: #F2F2F2;
+}
+
+.header-wrapper{
+        position: relative;
+        width: 100%;
+        height: 56px;
+        .header-content{
+            position: absolute;
+            top:0;
+            left:0;
+            width: 100%;
+            height: 56px;
+            background-color: rgba(255,255,255,0.4);
+            z-index:5;
+            .middle{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                margin: 0 auto;
+                width: 1200px;
+                height: 100%;
+                line-height: 56px;
+                font-size: 13px;
+                color: #222;
+                .info{
+                    .item{
+                        display: inline-block;
+                        cursor: pointer;
+                        padding: 0 15px;
+                        &:hover{
+                            background-color: rgba(255,255,255,0.4);
+                        }
+                        .icon{
+                            margin-right: 4px;
+                            color: #20A0FF;
+                        }
+                    }
+                }
+                .user{
+                    .item{
+                        display: inline-block;
+                        cursor: pointer;
+                        padding: 0 15px;
+                        &:hover{
+                            background-color: rgba(255,255,255,0.4);
+                        }
+                        .icon{
+                            margin-right: 4px;
+                            color: #20A0FF;
+                        }
+                    }
+                }
+            }
+        }
+        .header-bg{
+            width:100%;
+            height: 170px;
+            overflow: hidden;
+            .bg-img{
+                width:100%;
+                height: 170px;
+                min-width: 1160px;
+            }
+        }
+    }
+.user-page{
+  width: 1200px;
+  margin: 0 auto;
+}
+.user-nav{
+
+  width: 1180px;height: 60px;background-color: white;display: flex;flex-direction: row;padding: 0 10px;position: relative;
+  a { text-decoration: none; }
+  a:hover{
+    border: 0
+  }
+
+  .user-nav-item{
+    width: 55px;height: 60px;margin-left: 30px;display: flex;flex-direction: row;justify-content: space-between;align-items: center;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 1s;
+    &.active{
+      @include border-bottom-3px(deepskyblue)
+    }
+  }
+
+  .user-nav-item-active{
+    position: absolute;width: 55px;height: 4px;bottom: 0;left: 140px;background-color: deepskyblue;
+    transition: left 0.5s;
+  }
+
+}
+
+.user-banner{
+  min-width: 1100px;
+  height: 200px;
+  background: url(../images/user-banner.png)
+}
+.user-box{
+  width: 1200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 20px;
+  .user-box-left{
+    width: 850px;
+    background-color: white;
+    .user-title{
+      display: flex;flex-direction: row;
+      padding: 0 10px;
+      font-size: 15px;
+      justify-content: space-between
+    }
+    .more{
+      font-size: 14px;line-height: 34px;
+      a{
+        color: black;
+      }
+    }
+    .user-title-box{
+     display: flex;
+      flex-direction: row;
+      align-items: center;
+      .desc{
+        margin-right: 10px;font-size: 23px;
+      }
+      .badge{
+        margin-right: 30px;
+      }
+      .news{
+        margin-right: 10px
+      }
+      .see{
+        margin-right: 10px
+      }
+    }
+
+    .user-video-box{
+      padding: 10px;
+      width: 170px;
+      background-color: #fbfbfb;
+      float: left;
+      margin-bottom: 10px;
+      margin-right: 20px;
+      .see-box{
+        display: flex;flex-direction: row;
+        .see-item{
+          width: 75px
+        }
+      }
+    }
+  }
+
+  .user-box-right{
+    width: 300px;
+    .user-upload{
+      width: 100%;
+      height: 150px;
+      margin-bottom: 20px;
+      background-color: white;
+      .upload-box{
+        height:40px;width:80%;
+        border: 1px solid rgba(0,0,0,0.3);
+        margin-left: 10%;
+        display: flex;
+        flex-direction: row;justify-content: space-around;align-items: center;font-size: 15px;
+        color: rgba(0,0,0,0.3);
+        a{
+          color: rgba(0,0,0,0.3);
+        }
+      }
+    }
+    .create-center{
+      height:90px;
+      width:100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center
+    }
+    .middle-border{
+      height: 60%;width: 1px;background-color: rgba(0,0,0,0.2)
+    }
+
+    .use-notice{
+      width:100%;
+      height: 200px;
+      background-color: white;
+      padding: 5px;
+      .user-desc{
+        width:100%;word-wrap: break-word;font-size: 15px;text-Indent: 2em;
+      }
+    }
+    .user-care{
+      width: 100%;height: 200px;
+      background-color: white;
+      margin-top: 20px;
+      padding: 5px 10px;
+      .user-care-item{
+        display: flex;flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        border-bottom: 1px solid rgba(0,0,0,0.1);font-size: 23px;
+        color: #525050;
+        .border-top{
+          margin: 0 10px;
+          height:25px;
+          width: 2px;
+          background:rgba(0,0,0,0.1);
+        }
+      }
+    }
+  }
+}
+
+.pagelist {
+    display: table-cell;
+    vertical-align: middle;
+    overflow: hidden;
+  bottom: 0;
+  right: 0;
+}
+
+.pageturn li {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    margin-left: 10px;
+    float: left;
+    text-align: center;
+}
+
+.pageturn li:first-child {
+    margin-left: 0;
+}
+
+.pageturn li:hover a, .pageturn .active a {
+    background: #717171;
+    color: #fff;
+    border-color: #eaeaea;
+}
+
+.pageturn a {
+    border: 1px solid #eaeaea;
+    display: block;
+    height: 28px;
+    color: #6c6c6c;
+}
+
+.pageturn .long {
+    width: 100px;
+}
+
+.pageturn .none a {
+    border: 0;
+}
+
+.pageright {
+    float: right;
+    width: auto;
+    display: inline;
+    clear: none;
+    margin-top: 10px;
+}

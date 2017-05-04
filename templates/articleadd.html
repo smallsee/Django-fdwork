@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}FD动漫爱好网-本子添加{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bookadd.css' %}">
+{% endblock %}
+
+{% block content %}
+    <form id="jsAvatarForm" action="{% url 'article:article_add' %}" enctype="multipart/form-data" method="post">
+
+        <select name="tag">
+            <option value="jl">交流</option>
+            <option value="dhzx">动画资讯</option>
+            <option value="qtzx">其他资讯</option>
+            <option value="fdsw">fd事务</option>
+        </select>
+
+        <input type="file" name="image" id="avatarUp" class="js-img-up"/>
+
+        名字：<input type="text" name="name" />
+
+        描述<input type="text" name="desc" />
+
+        <textarea id="editor_id" name="detail"></textarea>
+        {% csrf_token %}
+        <input type="submit">
+    </form>
+
+    <button onclick="xiaohai()">ss</button>
+{% endblock %}
+
+
+
+{% block js %}
+    <script src="{% static 'js/kindeditor/kindeditor-all-min.js' %}"></script>
+    <script src="{% static 'js/kindeditor/lang/zh-CN.js' %}"></script>
+
+<script>
+    /**
+ * Created by Administrator on 2017/4/14.
+ */
+
+function xiaohai() {
+        console.log($('#editor_id').val())
+    }
+KindEditor.ready(function(K){
+    K.create('#editor_id',{
+        width:500,
+        height:200,
+        uploadJson: '/book/upload/kindeditor',
+        afterBlur: function(){this.sync();}
+    })
+})
+</script>
+
+
+{% endblock %}

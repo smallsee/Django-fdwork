@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load staticfiles %}
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}FD动漫爱好网{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/user.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'js/Semantic-UI-CSS-master/semantic.css' %}">
+    {% block css %}{% endblock %}
+</head>
+<body>
+
+<div class="header-wrapper">
+        <div class="header-content">
+            <div class="middle">
+                <div class="info">
+                    <a href="{% url 'index' %}"><div class="item"><span class="icon icon-tv"></span>主页</div></a>
+                    <div class="item">画友</div>
+                    <div class="item">游戏中心</div>
+                    <div class="item">直播</div>
+                    <div class="item">周边</div>
+                    <div class="item">萌战</div>
+                </div>
+                {% if request.user.is_authenticated %}
+                <div class="user">
+                    <a href="{% url 'user:user_info' request.user.id %}"><div class="item">用户</div></a>
+                    <div class="item">消息</div>
+                    <div class="item">动态</div>
+                    <div class="item">收藏夹</div>
+                    <div class="item">历史</div>
+                    <div class="item">投稿</div>
+                    <a href="{% url 'logout' %}"><div class="item">退出</div></a>
+                </div>
+                {% else %}
+                <div class="user">
+                    <a href="{% url 'login' %}"><div class="item">登录</div></a>
+                    <a href="{% url 'register' %}"><div class="item">注册</div></a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+<div class="user-page">
+  <div class="xiaohai-container">
+    <div class="user-banner"></div>
+
+    <div class="user-nav" >
+      <img src="{{ MEDIA_URL }}{{ user_info.image }}"  alt="" width="100" height="100" style="margin-top: -50px;border-radius: 50%" >
+
+        <a href="{% url 'user:user_info' user_info.id %}">
+      <div class="user-nav-item {% ifequal category 'home' %}active{% endifequal %}">
+        <div style="color: #55bd94" class="fa fa-home "></div>
+        <div>主页</div>
+      </div></a>
+
+    <a href="{% url 'user:user_movie' user_info.id %}">
+      <div  class="user-nav-item  {% ifequal category 'movie' %}active{% endifequal %}" >
+        <div style="color: #4bb4d6" class="fa fa-youtube-play"></div>
+        <div >视频</div>
+      </div></a>
+
+
+        <a href="{% url 'user:user_article' user_info.id %}">
+      <div class="user-nav-item {% ifequal category 'article' %}active{% endifequal %}">
+        <div style="color: #f25d8e" class="fa fa-coffee"></div>
+        <div>茶会</div>
+      </div></a>
+
+        <a href="{% url 'user:user_book' user_info.id %}">
+      <div class="user-nav-item {% ifequal category 'book' %}active{% endifequal %}">
+        <div style="color: #5fc7e9" class="fa fa-leanpub"></div>
+        <div>本子</div>
+      </div></a>
+
+    <a href="{% url 'user:user_music' user_info.id %}">
+      <div class="user-nav-item {% ifequal category 'music' %}active{% endifequal %}">
+        <div style="color: #F18E39" class="fa fa-music"></div>
+        <div>音乐</div>
+      </div></a>
+
+    <a href="{% url 'user:user_resource' user_info.id %}">
+      <div class="user-nav-item {% ifequal category 'resource' %}active{% endifequal %}">
+        <div style="color: #B45FE9" class="fa fa-file-text"></div>
+        <div>资源</div>
+      </div></a>
+
+    {% if user_info.id == request.user.id %}
+    <a href="{% url 'user:user_collect' user_info.id %}">
+      <div class="user-nav-item {% ifequal category 'collect' %}active{% endifequal %}" >
+        <div style="color: #f86952" class="fa fa-star-half-empty"></div>
+        <div>收藏</div>
+      </div></a>
+    {% endif %}
+
+      <div class="user-nav-item" >
+        <div style="color: #e8a44c" class="glyphicon glyphicon-star"></div>
+        <div>订阅</div>
+      </div>
+
+{#      <div class="user-nav-item-active"></div>#}
+    </div>
+
+    <div class="user-box" >
+
+      <div class="user-box-left" >
+        {% block content %}
+
+
+        {% endblock %}
+      </div>
+
+
+
+      <div class="user-box-right" >
+          {% if request.user.id == user_info.id %}
+        <div class="user-upload" >
+          <div class="create-center" >
+            <img src="{% static 'images/upload_icon.png' %}" alt="" height="70" width="70">
+            <span style="margin-left: 10px;">创作中心</span>
+          </div>
+          <div class="upload-box" >
+              <a href="{% url 'movie:movie_add' %}"><div>
+              <span class="fa fa-cloud-upload"></span>
+              <span>: 上传视频</span>
+            </div></a>
+            <div class="middle-border" ></div>
+            <div>
+              <span class="fa fa-cogs"></span>
+              <span>视频管理</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="user-upload" >
+          <div class="create-center" >
+            <img src="{% static 'images/upload_icon.png' %}" alt="" height="70" width="70">
+            <span style="margin-left: 10px;">创作中心</span>
+          </div>
+          <div class="upload-box" >
+              <a href="{% url 'music:music_add' %}"><div>
+              <span class="fa fa-cloud-upload"></span>
+              <span>: 上传音乐</span>
+            </div></a>
+            <div class="middle-border" ></div>
+            <div>
+              <span class="fa fa-cogs"></span>
+              <span>视频管理</span>
+            </div>
+          </div>
+        </div>
+
+          <div class="user-upload" >
+          <div class="create-center" >
+            <img src="{% static 'images/upload_icon4.png' %}" alt="" height="70" width="70">
+            <span style="margin-left: 10px;">创作中心</span>
+          </div>
+          <div class="upload-box" >
+              <a href="{% url 'book:book_add' %}"><div>
+              <span class="fa fa-cloud-upload"></span>
+              <span>: 上传本子</span>
+            </div></a>
+            <div class="middle-border" ></div>
+            <div>
+              <span class="fa fa-cogs"></span>
+              <span>视频管理</span>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="user-upload" >
+          <div class="create-center" >
+            <img src="{% static 'images/upload_icon5.png' %}" alt="" height="70" width="70">
+            <span style="margin-left: 10px;">创作中心</span>
+          </div>
+          <div class="upload-box" >
+              <a href="{% url 'article:article_add' %}"><div>
+              <span class="fa fa-cloud-upload"></span>
+              <span>: 上传文章</span>
+            </div></a>
+            <div class="middle-border" ></div>
+            <div>
+              <span class="fa fa-cogs"></span>
+              <span>视频管理</span>
+            </div>
+          </div>
+        </div>
+              <div class="user-upload" >
+          <div class="create-center" >
+            <img src="{% static 'images/upload_icon5.png' %}" alt="" height="70" width="70">
+            <span style="margin-left: 10px;">创作中心</span>
+          </div>
+          <div class="upload-box" >
+              <a href="{% url 'resource:resource_add' %}"><div>
+              <span class="fa fa-cloud-upload"></span>
+              <span>: 上传资源</span>
+            </div></a>
+            <div class="middle-border" ></div>
+            <div>
+              <span class="fa fa-cogs"></span>
+              <span>视频管理</span>
+            </div>
+          </div>
+        </div>
+            {% endif %}
+
+        <div class="use-notice" >
+          <h3 >公告</h3>
+          <div class="hr" style="margin-top: 5px;"></div>
+          <div class="user-desc" >
+            asdsajkdhskjadksanjbskjdskjankjasdasdasdashndkashkdhsakhdsahkdska
+          </div>
+        </div>
+
+        <div class="user-care" >
+
+          <div class="user-care-item" >
+            <div>
+              <span style="margin-right: 3px;">关注</span>
+              <span >68</span>
+            </div>
+            <div class="border-top" ></div>
+            <div>
+              <span style="margin-right: 3px;">粉丝</span>
+              <span>68</span>
+            </div>
+
+          </div>
+
+
+
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</body>
+</html>

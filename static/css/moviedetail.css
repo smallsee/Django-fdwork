@@ -1,0 +1,332 @@
+.videoDetail {
+  position: absolute;
+  top: 235px;
+  left: 0;
+  z-index: 50;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  transition: all 0.5s; }
+  .videoDetail.video-detail-enter-active, .videoDetail.video-detail-leave {
+    transform: translate3d(0, 0, 0);
+    opacity: 1; }
+  .videoDetail.video-detail-enter, .videoDetail.video-detail-leave-active {
+    transform: translate3d(100%, 0, 0);
+    opacity: 0; }
+  .videoDetail .detail-info {
+    padding-top: 10px;
+    position: relative; }
+    .videoDetail .detail-info:after {
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      border-top: 1px solid rgba(7, 17, 27, 0.1);
+      content: " "; }
+    .videoDetail .detail-info .detail-container {
+      display: flex;
+      justify-content: space-between;
+      margin: 0 auto;
+      width: 1160px;
+      height: 120px; }
+      .videoDetail .detail-info .detail-container .left {
+        width: 640px; }
+        .videoDetail .detail-info .detail-container .left .title {
+          display: block;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+          margin-right: 80px;
+          color: #525659;
+          font-weight: 700;
+          height: 24px;
+          line-height: 24px;
+          padding: 8px 0;
+          font-size: 18px; }
+        .videoDetail .detail-info .detail-container .left .info {
+          margin-top: 10px;
+          font-size: 0; }
+          .videoDetail .detail-info .detail-container .left .info .category {
+            display: inline-block;
+            font-size: 12px; }
+            .videoDetail .detail-info .detail-container .left .info .category .type {
+              color: #99a2aa; }
+              .videoDetail .detail-info .detail-container .left .info .category .type:hover {
+                color: #00a1d6; }
+          .videoDetail .detail-info .detail-container .left .info .date, .videoDetail .detail-info .detail-container .left .info ._id {
+            margin-left: 20px;
+            font-size: 12px;
+            color: #99a2aa; }
+        .videoDetail .detail-info .detail-container .left .play-info .play-item {
+          display: inline-block;
+          border-right: 1px solid rgba(7, 17, 27, 0.1);
+          padding: 0 40px;
+          margin-top: 20px;
+          font-size: 0; }
+          .videoDetail .detail-info .detail-container .left .play-info .play-item:last-child {
+            border-right: 0; }
+          .videoDetail .detail-info .detail-container .left .play-info .play-item .icon {
+            margin-right: 10px;
+            line-height: 20px;
+            font-size: 20px;
+            color: #99a2aa; }
+          .videoDetail .detail-info .detail-container .left .play-info .play-item .num {
+            vertical-align: bottom;
+            line-height: 20px;
+            font-size: 12px;
+            color: #222; }
+      .videoDetail .detail-info .detail-container .right {
+        position: relative; }
+        .videoDetail .detail-info .detail-container .right img {
+          border-radius: 50%;
+          margin-right: 10px; }
+        .videoDetail .detail-info .detail-container .right .user-info {
+          display: inline-block;
+          vertical-align: top;
+          width: 225px; }
+          .videoDetail .detail-info .detail-container .right .user-info .name {
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #00a1d6; }
+          .videoDetail .detail-info .detail-container .right .user-info .desc {
+            display: block;
+            word-break: normal;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            margin-bottom: 5px;
+            width: 225px;
+            overflow: hidden;
+            max-height: 40px;
+            line-height: 18px;
+            font-size: 12px;
+            color: #333; }
+          .videoDetail .detail-info .detail-container .right .user-info .welcome {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #99a2aa; }
+          .videoDetail .detail-info .detail-container .right .user-info .action {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px; }
+            .videoDetail .detail-info .detail-container .right .user-info .action .care {
+              cursor: pointer;
+              padding: 6px 45px;
+              border: 1px solid #00a1d6;
+              border-radius: 4px;
+              font-size: 12px;
+              color: #fff;
+              background: #00a1d6;
+              transition: all 0.2s; }
+              .videoDetail .detail-info .detail-container .right .user-info .action .care:hover {
+                opacity: 0.8; }
+              .videoDetail .detail-info .detail-container .right .user-info .action .care .icon {
+                margin-right: 10px; }
+            .videoDetail .detail-info .detail-container .right .user-info .action .battery {
+              cursor: pointer;
+              padding: 6px 20px;
+              border: 1px solid #f25d8e;
+              border-radius: 4px;
+              font-size: 12px;
+              color: #f25d8e;
+              transition: all 0.2s; }
+              .videoDetail .detail-info .detail-container .right .user-info .action .battery:hover {
+                color: #fff;
+                background: #f25d8e; }
+  .videoDetail .detail-content {
+    width: 100%;
+    min-height: 300px;
+    background: #e5e9ef; }
+    .videoDetail .detail-content .detail-container {
+      padding: 20px 0;
+      margin: 0 auto;
+      width: 1160px; }
+      .videoDetail .detail-content .detail-container .lesson-box {
+        width: 100%;
+        height: 80px;
+        margin-bottom: 20px; }
+        .videoDetail .detail-content .detail-container .lesson-box a {
+          color: #222; }
+        .videoDetail .detail-content .detail-container .lesson-box .lesson-item {
+          float: left;
+          margin-right: 20px;
+          border-radius: 10px;
+          max-width: 120px;
+          height: 30px;
+          padding: 5px;
+          background-color: white;
+          text-align: center;
+          line-height: 30px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          width: 20em; }
+        .videoDetail .detail-content .detail-container .lesson-box .active {
+          background-color: rgba(27, 36, 51, 0.59);
+          color: white; }
+      .videoDetail .detail-content .detail-container .video {
+        width: 100%; }
+      .videoDetail .detail-content .detail-container .arc-toobar {
+        box-sizing: border-box;
+        padding: 0 4px;
+        margin-top: 20px;
+        width: 100%;
+        height: 80px;
+        background: #fff; }
+        .videoDetail .detail-content .detail-container .arc-toobar .item {
+          display: flex;
+          justify-content: center;
+          float: left;
+          box-sizing: border-box;
+          cursor: pointer;
+          padding-top: 10px;
+          margin-left: 20px;
+          width: 150px;
+          height: 100%;
+          font-size: 0; }
+          .videoDetail .detail-content .detail-container .arc-toobar .item .icon {
+            line-height: 55px;
+            font-size: 50px; }
+          .videoDetail .detail-content .detail-container .arc-toobar .item .content {
+            display: inline-block;
+            font-size: 12px;
+            margin-left: 30px; }
+            .videoDetail .detail-content .detail-container .arc-toobar .item .content h2 {
+              margin-top: 10px;
+              margin-bottom: 8px;
+              font-weight: 700;
+              font-size: 18px; }
+          .videoDetail .detail-content .detail-container .arc-toobar .item:hover {
+            border-right: 1px solid rgba(7, 17, 27, 0.2);
+            border-left: 1px solid rgba(7, 17, 27, 0.2); }
+          .videoDetail .detail-content .detail-container .arc-toobar .item:first-of-type {
+            border-left: 0; }
+  .videoDetail .detail-bottom {
+    margin: 0 auto;
+    padding-top: 20px;
+    width: 1160px;
+    min-height: 300px;
+    position: relative; }
+    .videoDetail .detail-bottom:after {
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      border-top: 1px solid rgba(7, 17, 27, 0.3);
+      content: " "; }
+    .videoDetail .detail-bottom .left {
+      float: left;
+      width: 890px; }
+      .videoDetail .detail-bottom .left .desc {
+        box-sizing: border-box;
+        padding-top: 10px;
+        padding-bottom: 20px;
+        line-height: 20px;
+        font-size: 14px;
+        color: #07111b;
+        width: 100%;
+        position: relative; }
+        .videoDetail .detail-bottom .left .desc:after {
+          display: block;
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          width: 100%;
+          border-top: 1px solid rgba(7, 17, 27, 0.3);
+          content: " "; }
+      .videoDetail .detail-bottom .left .commit-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0 0 0 0;
+        position: relative; }
+        .videoDetail .detail-bottom .left .commit-header:after {
+          display: block;
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          width: 100%;
+          border-top: 1px solid rgba(7, 17, 27, 0.3);
+          content: " "; }
+        .videoDetail .detail-bottom .left .commit-header .commit-desc {
+          font-size: 0; }
+          .videoDetail .detail-bottom .left .commit-header .commit-desc span {
+            display: inline-block;
+            line-height: 55px;
+            height: 55px;
+            margin-right: 20px;
+            font-size: 14px; }
+          .videoDetail .detail-bottom .left .commit-header .commit-desc .active {
+            border-bottom: 1px solid red; }
+        .videoDetail .detail-bottom .left .commit-header .commit-fengye ul li {
+          float: left;
+          margin-right: 5px;
+          line-height: 55px; }
+      .videoDetail .detail-bottom .left .commit-left {
+        padding-top: 20px; }
+        .videoDetail .detail-bottom .left .commit-left .comment-item {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 20px; }
+          .videoDetail .detail-bottom .left .commit-left .comment-item .thumb {
+            padding: 10px; }
+            .videoDetail .detail-bottom .left .commit-left .comment-item .thumb img {
+              border-radius: 50%; }
+        .videoDetail .detail-bottom .left .commit-left .commit-text {
+          width: 90%;
+          height: 70px;
+          margin-bottom: 20px;
+          position: relative; }
+          .videoDetail .detail-bottom .left .commit-left .commit-text:after {
+            display: block;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            border-top: 1px solid rgba(7, 17, 27, 0.4);
+            content: " "; }
+          .videoDetail .detail-bottom .left .commit-left .commit-text textarea {
+            resize: none;
+            padding: 5px 10px;
+            line-height: normal;
+            font-size: 12px;
+            display: inline-block;
+            box-sizing: border-box;
+            background-color: #f4f5f7;
+            border: 1px solid #e5e9ef;
+            overflow: auto;
+            border-radius: 4px;
+            color: #555;
+            width: 100%;
+            height: 100%; }
+            .videoDetail .detail-bottom .left .commit-left .commit-text textarea:focus {
+              outline: #00b2ff solid thin; }
+            .videoDetail .detail-bottom .left .commit-left .commit-text textarea.outline {
+              outline: #00b2ff solid thin; }
+        .videoDetail .detail-bottom .left .commit-left .put-text {
+          width: 100px;
+          height: 70px;
+          margin-left: 25px;
+          cursor: pointer;
+          color: white;
+          background-color: rgba(0, 178, 255, 0.59); }
+          .videoDetail .detail-bottom .left .commit-left .put-text:hover {
+            background-color: rgba(0, 178, 255, 0.8); }
+          .videoDetail .detail-bottom .left .commit-left .put-text p {
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            line-height: 70px; }
+    .videoDetail .detail-bottom .right {
+      float: right;
+      width: 250px;
+      min-height: 300px;
+      background-color: red; }
+
+.my-player-dimensions {
+  height: 652px; }
+
+/*# sourceMappingURL=moviedetail.css.map */

@@ -1,0 +1,215 @@
+a {
+  color: #666; }
+  a.active {
+    color: #D8667A; }
+
+.music-banner {
+  border: 4px solid #d5d5d5;
+  width: 1152px;
+  height: 392px;
+  overflow: hidden;
+  margin-bottom: 20px; }
+
+.resource-banner .banner-item {
+  float: left;
+  width: 170px;
+  padding: 0;
+  border-bottom: 0;
+  margin: 0 28px 0 0; }
+  .resource-banner .banner-item:nth-last-of-type(1) {
+    margin-right: 0; }
+  .resource-banner .banner-item .item-image {
+    width: 170px;
+    height: 113px;
+    position: relative; }
+    .resource-banner .banner-item .item-image .tag {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      white-space: nowrap;
+      color: #ffffff;
+      text-align: center;
+      padding: 5px;
+      font-size: 12px;
+      background-color: rgba(202, 134, 97, 0.47); }
+      .resource-banner .banner-item .item-image .tag:hover {
+        background-color: #ca8661; }
+  .resource-banner .banner-item .item-desc {
+    padding-top: 10px;
+    min-height: 60px;
+    max-height: 110px;
+    overflow: hidden; }
+
+.resource-wrap {
+  width: 1160px;
+  position: relative; }
+  .resource-wrap .resource-left {
+    width: 170px;
+    position: relative;
+    margin-right: 28px;
+    min-height: 200px;
+    float: left; }
+    .resource-wrap .resource-left:after {
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      border-top: 1px solid rgba(7, 17, 27, 0.2);
+      content: " "; }
+    .resource-wrap .resource-left .category {
+      box-sizing: border-box;
+      word-wrap: break-word;
+      border: 0; }
+      .resource-wrap .resource-left .category h3 {
+        display: inline-block;
+        margin-bottom: 15px;
+        font-size: 15px;
+        font-weight: bold;
+        padding-top: 15px;
+        border-top: 1px solid black;
+        color: #333; }
+      .resource-wrap .resource-left .category li {
+        color: #666;
+        position: relative;
+        margin: 0;
+        line-height: 2;
+        padding-left: 1rem; }
+        .resource-wrap .resource-left .category li .icon {
+          margin-left: -1rem; }
+  .resource-wrap .resource-main {
+    width: 670px;
+    min-height: 200px;
+    float: left;
+    position: relative; }
+    .resource-wrap .resource-main .resource-box {
+      width: 100%;
+      height: 300px;
+      margin-bottom: 20px; }
+      .resource-wrap .resource-main .resource-box .resource-box-item {
+        width: 100%;
+        height: 300px;
+        position: relative; }
+    .resource-wrap .resource-main .resource-item-wrap {
+      position: relative;
+      min-height: 140px;
+      padding: 0 0 30px;
+      margin-bottom: 30px;
+      border-bottom: 1px solid #eee; }
+      .resource-wrap .resource-main .resource-item-wrap .resource-thumbnail {
+        float: left;
+        width: 210px;
+        height: 140px;
+        margin-right: 20px;
+        overflow: hidden; }
+        .resource-wrap .resource-main .resource-item-wrap .resource-thumbnail img {
+          width: 100%;
+          min-height: 100%; }
+      .resource-wrap .resource-main .resource-item-wrap .resource-mxh {
+        position: relative;
+        min-height: 100px;
+        max-height: 110px;
+        overflow: hidden; }
+        .resource-wrap .resource-main .resource-item-wrap .resource-mxh .resource-title {
+          font-size: 1.1rem;
+          margin-bottom: 10px; }
+        .resource-wrap .resource-main .resource-item-wrap .resource-mxh .resource-desc {
+          color: #222222; }
+      .resource-wrap .resource-main .resource-item-wrap .resource-foot {
+        margin-top: 10px;
+        padding-top: 10px;
+        border-top: 1px dashed #eee;
+        overflow: hidden;
+        font-size: .8rem;
+        color: #b2b2b2; }
+        .resource-wrap .resource-main .resource-item-wrap .resource-foot li {
+          float: left;
+          margin-right: 10px; }
+          .resource-wrap .resource-main .resource-item-wrap .resource-foot li:nth-last-of-type(1) {
+            margin-right: 0;
+            float: right; }
+  .resource-wrap .resource-right {
+    width: 260px;
+    min-height: 200px;
+    float: right;
+    position: relative; }
+    .resource-wrap .resource-right:after {
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      border-top: 1px solid rgba(7, 17, 27, 0.2);
+      content: " "; }
+    .resource-wrap .resource-right .new-resource {
+      box-sizing: border-box;
+      word-wrap: break-word;
+      border: 0; }
+      .resource-wrap .resource-right .new-resource h3 {
+        display: inline-block;
+        margin-bottom: 15px;
+        font-size: 15px;
+        font-weight: bold;
+        padding-top: 15px;
+        border-top: 1px solid black;
+        color: #333; }
+      .resource-wrap .resource-right .new-resource li {
+        margin: 0 0 15px;
+        padding: 0 0 10px;
+        border-bottom: 1px solid #eee;
+        color: #666; }
+        .resource-wrap .resource-right .new-resource li .img {
+          float: left;
+          width: 80px;
+          height: 55px;
+          overflow: hidden; }
+        .resource-wrap .resource-right .new-resource li .new-resource-desc {
+          float: right;
+          width: 170px;
+          height: 55px;
+          overflow: hidden; }
+
+.pageturn .pagelist {
+  display: table-cell;
+  vertical-align: middle;
+  overflow: hidden;
+  position: absolute;
+  bottom: 0;
+  right: 0; }
+
+.pageturn li {
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  margin-left: 10px;
+  float: left;
+  text-align: center; }
+
+.pageturn li:first-child {
+  margin-left: 0; }
+
+.pageturn li:hover a, .pageturn .active a {
+  background: #717171;
+  color: #fff;
+  border-color: #eaeaea; }
+
+.pageturn a {
+  border: 1px solid #eaeaea;
+  display: block;
+  height: 28px;
+  color: #6c6c6c; }
+
+.pageturn .long {
+  width: 100px; }
+
+.pageturn .none a {
+  border: 0; }
+
+.pageright {
+  float: right;
+  width: auto;
+  display: inline;
+  clear: none;
+  margin-top: 10px; }
+
+/*# sourceMappingURL=resource.css.map */

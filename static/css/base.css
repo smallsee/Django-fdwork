@@ -1,0 +1,103 @@
+@font-face {
+  font-family: 'xiaohai';
+  src: url("../fonts/HYQingKongTiJ.ttf"); }
+.header-wrapper {
+  position: relative;
+  width: 100%;
+  height: 170px; }
+  .header-wrapper .header-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 56px;
+    background-color: rgba(255, 255, 255, 0.4);
+    z-index: 5; }
+    .header-wrapper .header-content .middle {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin: 0 auto;
+      width: 1160px;
+      height: 100%;
+      line-height: 56px;
+      font-size: 13px;
+      color: #222; }
+      .header-wrapper .header-content .middle .info .item {
+        display: inline-block;
+        cursor: pointer;
+        padding: 0 15px; }
+        .header-wrapper .header-content .middle .info .item:hover {
+          background-color: rgba(255, 255, 255, 0.4); }
+        .header-wrapper .header-content .middle .info .item .icon {
+          margin-right: 4px;
+          color: #20A0FF; }
+      .header-wrapper .header-content .middle .user .item {
+        display: inline-block;
+        cursor: pointer;
+        padding: 0 15px; }
+        .header-wrapper .header-content .middle .user .item:hover {
+          background-color: rgba(255, 255, 255, 0.4); }
+        .header-wrapper .header-content .middle .user .item .icon {
+          margin-right: 4px;
+          color: #20A0FF; }
+  .header-wrapper .header-bg {
+    width: 100%;
+    height: 170px;
+    overflow: hidden; }
+    .header-wrapper .header-bg .bg-img {
+      width: 100%;
+      height: 170px;
+      min-width: 1160px; }
+
+.tab {
+  width: 1160px;
+  height: 50px;
+  margin: 0 auto; }
+  .tab .tab-item {
+    display: inline-block;
+    padding-left: 0;
+    padding-right: 20px;
+    padding-top: 10px;
+    text-align: center; }
+    .tab .tab-item:hover a {
+      color: #1D8CE0; }
+    .tab .tab-item:last-child {
+      padding-right: 0; }
+    .tab .tab-item a {
+      line-height: 25px;
+      font-size: 14px;
+      color: #222; }
+    .tab .tab-item .num {
+      display: block;
+      font-size: 12px;
+      line-height: 18px;
+      background: #ffafc9;
+      border-radius: 4px;
+      color: #fff; }
+    .tab .tab-item .fa-home {
+      display: block;
+      line-height: 18px;
+      color: #ffafc9; }
+
+.content {
+  overflow: hidden;
+  margin: 20px auto;
+  width: 1160px; }
+
+.footer {
+  overflow: hidden;
+  margin: 20px auto;
+  padding-top: 10px;
+  width: 1160px;
+  position: relative; }
+  .footer:after {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    border-top: 1px solid rgba(7, 17, 27, 0.2);
+    content: " "; }
+
+/*# sourceMappingURL=base.css.map */

@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}FD动漫爱好网-本子详情页{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/movieadd.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<form action="{% url 'movie:movie_add' %}" enctype="multipart/form-data" method="post">
+    <ul>
+        <li>
+            <label for="">视频名</label>
+            <input type="text" name="name" value=""/>
+        </li>
+        <li>
+            <label for="">类型选择</label>
+            <select name="category">
+            <option value="dh">动画</option>
+            <option value="fj">番剧</option>
+            <option value="gc">鬼畜</option>
+            <option value="kj">科技</option>
+            <option value="dsj">电视剧</option>
+            <option value="lf">里番</option>
+        </select>
+        </li>
+
+        <li>
+            <label for="">上传封面图</label>
+            <input type="file" name="image" id="avatarUp" class="js-img-up"/>
+        </li>
+        <li>
+            <label for="">视频描述</label>
+            <input type="text" name="desc" value=""/>
+        </li>
+        <li>
+            <label for="">视频名</label>
+            <input type="text" name="name" value=""/>
+        </li>
+
+        <li>
+            视频详情
+            <textarea id="editor_id" name="detail"></textarea>
+        </li>
+    </ul>
+
+    <ul>
+        <li>
+            <label for="">章节名</label>
+            <input type="text" name="video_name" value=""/>
+        </li>
+        <li>
+            <label>上传视频</label>
+            <input type="file" id="xiaohai_video" onchange="upload(this.files)" />
+            <input id="movie-url" name="url" type="hidden" value=""/>
+            <progress id="progress" value="0" max="100"></progress>
+        </li>
+    </ul>
+    {% csrf_token %}
+    <input type="submit" value="提交">
+</form>
+
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/kindeditor/kindeditor-all-min.js' %}"></script>
+<script src="{% static 'js/kindeditor/lang/zh-CN.js' %}"></script>
+<script>
+
+KindEditor.ready(function(K){
+    K.create('#editor_id',{
+        width:500,
+        height:200,
+        uploadJson: '/book/upload/kindeditor',
+        afterBlur: function(){this.sync();}
+    })
+})
+
+function upload(){
+var fd = new FormData();
+fd.append("file",$('#xiaohai_video')[0].files[0]);
+fd.append("token","{{ token }}");
+fd.append("key","{{ key }}");
+var xhr = new XMLHttpRequest();
+xhr.addEventListener('progress', function(e) {
+  var done = e.loaded || e.loaded, total = e.total || e.total;
+  console.log('xhr上传进度: ' + (Math.floor(done/total*1000)/10) + '%');
+}, false);
+if ( xhr.upload ) {
+  xhr.upload.onprogress = function(e) {
+    var done = e.loaded || e.loaded, total = e.total || e.total;
+    console.log('xhr.upload上传进度: ' + done + ' / ' + total + ' = ' + (Math.floor(done/total*1000)/10) + '%');
+    document.getElementById("progress").value = Math.floor(done/total*1000)/10;
+    if ((Math.floor(done/total*1000)/10) == 100 ){
+      $('#movie-url').val('oohdpkbhy.bkt.clouddn.com/' + '{{ key }}')
+    }
+  };
+}
+xhr.onreadystatechange = function(e) {
+  if ( 4 == this.readyState ) {
+    console.log(['xhr upload complete', e]);
+  }
+};
+xhr.open('POST', "http://up.qiniu.com", true);
+xhr.send(fd);
+}
+
+
+</script>
+{% endblock %}
